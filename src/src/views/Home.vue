@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <h1>{{message}}</h1>
+    <button class="btn btn-danger" id="btn-toggle-comment" @click="sendMessage()">  Cancelar</button>
   </div>
 </template>
 
@@ -12,7 +13,10 @@ export default {
 
   data() {
     return {
-    	message:''
+    	message:'',
+      test:{
+        testMessage:'testing'
+      }
     }
   },
 
@@ -26,6 +30,16 @@ export default {
       this.axios.get('/')
       .then((response) => {
       	this.message=response.data.message
+        console.log(response.data)
+      })
+      .catch((e)=>{
+        console.log('error' + e);
+      })
+    },
+
+    sendMessage(){
+      this.axios.post('/',this.test)
+      .then((response) => {
         console.log(response.data)
       })
       .catch((e)=>{
