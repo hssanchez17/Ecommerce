@@ -2,15 +2,27 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import path from 'path';
-
+const passport = require('passport');
 const app = express();
 
+app.use(cors({
+  origin:['http://localhost:8080'],
+   methods:['GET','POST','PUT','DELETE'],
+   credentials: true // enable set cookie
+}))
+
+
+
 // Middleware
-app.use(morgan('tiny'));
-app.use(cors());
+app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+require('./config/passport')(passport);
 
 // Rutas
 app.get('/', (req, res) => {
@@ -18,9 +30,7 @@ app.get('/', (req, res) => {
 });
 
 // Middleware para Vue.js router modo history
-const history = require('connect-history-api-fallback');
-app.use(history());
-app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.set('puerto', process.env.PORT || 3000);
 app.listen(app.get('puerto'), () => {

@@ -19,7 +19,7 @@ Vue.use(VueCookie);
 
 
 // Agregamos la URL base de nuestra API
-axios.defaults.baseURL = 'http://localhost:5000';
+axios.defaults.baseURL = 'http://localhost:3000';
 axios.defaults.withCredentials = true
 
 Vue.use(BootstrapVue)
