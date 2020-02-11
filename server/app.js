@@ -26,7 +26,7 @@ require('./config/passport')(passport);
 
 // Rutas
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.status(200).json({message: "Hello world"});
 });
 
 // Middleware para Vue.js router modo history

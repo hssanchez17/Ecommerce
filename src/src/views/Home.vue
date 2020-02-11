@@ -25,7 +25,8 @@ export default {
 
       this.axios.get('/')
       .then((response) => {
-      	this.message=response.data
+      	this.message=response.data.message
+        console.log(response.data)
       })
       .catch((e)=>{
         console.log('error' + e);
