@@ -1,16 +1,22 @@
 const LocalStrategy = require('passport-local').Strategy;
-const db = require('../models');
 const bcrypt = require('bcryptjs');
+const {database}=require('./database')
 
 module.exports = function(passport) {
   passport.use(
     new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
-      db.User.findOne({
-         where: {email: email} 
-      }).then(user => {
-        if (!user) {
-          return done(null, false, console.log('That email is not registered') );
-        }
+
+
+      const text='SELECT * FROM "Users" WHERE email=$1'
+      const values = [email]
+
+      database.query(text, values)
+      .then(response => {
+
+        const user=response.rows[0]
+
+        if (!user) return done(null, false, console.log('That email is not registered'));
+        
         bcrypt.compare(password, user.password, (err, isMatch) => {
           if (err) throw err;
           if (isMatch) return done(null, user);
@@ -25,9 +31,12 @@ module.exports = function(passport) {
   });
   
   passport.deserializeUser((id, done)=> {
-    db.User.findOne({
-      where:{id: id}
-    }).then(user=>{
+    const text='SELECT * FROM "Users" WHERE id=$1'
+    const values = [id]
+
+    database.query(text, values)
+    .then(response=>{
+      const user=response.rows[0]
       return done(null, user);
     })
   

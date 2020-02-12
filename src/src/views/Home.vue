@@ -27,7 +27,7 @@ export default {
   methods:{
     getMessage(){
 
-      this.axios.get('/')
+      this.axios.get('/test')
       .then((response) => {
       	this.message=response.data.message
         console.log(response.data)
@@ -38,7 +38,7 @@ export default {
     },
 
     sendMessage(){
-      this.axios.post('/',this.test)
+      this.axios.post('/test',this.test)
       .then((response) => {
         console.log(response.data)
       })
