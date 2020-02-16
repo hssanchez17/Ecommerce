@@ -7,7 +7,7 @@ module.exports = function(passport) {
     new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
 
 
-      const text='SELECT * FROM "Users" WHERE email=$1'
+      const text='SELECT * FROM users WHERE email=$1'
       const values = [email]
 
       database.query(text, values)
@@ -31,7 +31,7 @@ module.exports = function(passport) {
   });
   
   passport.deserializeUser((id, done)=> {
-    const text='SELECT * FROM "Users" WHERE id=$1'
+    const text='SELECT * FROM users WHERE id=$1'
     const values = [id]
 
     database.query(text, values)
