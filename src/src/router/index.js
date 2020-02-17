@@ -18,7 +18,6 @@ const routes = [
     name: 'productCreate',
     component: () => import( '../views/ProductCreate.vue'),
   },
-
   
 ]
 

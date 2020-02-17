@@ -14,5 +14,6 @@ CREATE TABLE Products(
    description TEXT NOT NULL, 
    price INTEGER NOT NULL,
    stock INTEGER NOT NULL,
-   imageUrl VARCHAR
+   imageUrl VARCHAR NOT NULL,
+   public_id VARCHAR NOT NULL
 );

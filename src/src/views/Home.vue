@@ -1,7 +1,21 @@
 <template>
   <div class="home">
-    <h1>{{message}}</h1>
-    <button class="btn btn-danger" id="btn-toggle-comment" @click="sendMessage()">  Cancelar</button>
+
+        <div class="container">
+     <div class="row" id="listOfProducts">
+        <div class="col-md-4"  v-for="product in listOfProducts">
+          
+          <div class="card">
+            <!--<a :href="'/user/show/'+ user.id">-->
+              <img :src="product.imageurl"  id="profilePicture">
+              <div class="card-body">
+                <h5 class="card-title"> {{product.title}}</h5>
+              </div>
+            <!--</a>-->
+          </div>
+        </div>
+      </div> 
+  </div>  
   </div>
 </template>
 
@@ -13,39 +27,38 @@ export default {
 
   data() {
     return {
-    	message:'',
-      test:{
-        testMessage:'testing'
-      }
+      listOfProducts:{}
     }
   },
 
-  created(){
-    this.getMessage();
+  mounted(){
+    this.getAllProducts()
   },
 
   methods:{
-    getMessage(){
-
-      this.axios.get('/test')
-      .then((response) => {
-      	this.message=response.data.message
-        console.log(response.data)
-      })
-      .catch((e)=>{
-        console.log('error' + e);
-      })
-    },
-
-    sendMessage(){
-      this.axios.post('/test',this.test)
-      .then((response) => {
-        console.log(response.data)
-      })
-      .catch((e)=>{
-        console.log('error' + e);
-      })
+    getAllProducts(){
+      this.axios.get(`product/show/all`)
+        .then((response) => {
+          console.log(response.data)
+          this.listOfProducts=response.data.products
+        })
+        .catch((e)=>{
+          console.log('error' + e);
+        })
     }
+ 
   }
 }
 </script>
+
+
+<style>
+      #profilePicture{
+    width: 100%; 
+    height: 300px;
+},
+* {
+  box-sizing: border-box;
+}
+</style>
+

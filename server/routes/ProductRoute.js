@@ -8,6 +8,6 @@ const upload = multer(storage)
 
 
 	router.post('/create',upload.single('imageUrl'),productController.create)
-
+	router.get('/show/all',productController.getAll)
 	
 module.exports = router;
