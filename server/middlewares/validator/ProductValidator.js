@@ -2,11 +2,18 @@ const { body, validationResult } = require('express-validator')
 
 const productValidationRules = () => {
   return [
-    body('name')
+    body('title')
       .not().isEmpty().withMessage("It can't be empty"),
-    body('quantity')
+    body('description')
+      .not().isEmpty().withMessage("It can't be empty"),
+    body('imageUrl')
+      .not().isEmpty().withMessage("It can't be empty"),
+    body('stock')
       .isInt().withMessage("It should be integer")
-      .not().isEmpty().withMessage("It can't be empty")
+      .not().isEmpty().withMessage("It can't be empty"),
+    body('price')
+      .isInt().withMessage("It should be integer")
+      .not().isEmpty().withMessage("It can't be empty"),
 
   ]
 }

@@ -10,7 +10,9 @@ CREATE TABLE Users(
 
 CREATE TABLE Products(
    id SERIAL PRIMARY KEY,
-   name VARCHAR NOT NULL,
-   quantity INTEGER NOT NULL,
-   description TEXT 
+   title VARCHAR NOT NULL,
+   description TEXT NOT NULL, 
+   price INTEGER NOT NULL,
+   stock INTEGER NOT NULL,
+   imageUrl VARCHAR
 );

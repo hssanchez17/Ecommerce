@@ -70,18 +70,24 @@
 				        	</span>
             			</div>
 
-            			<div class="form-group" id="ImageInput">
-              				<div class="input-group">
-			                  	<input 
-			                  	type="file"
-			                  	class="custom-file-input">
+            			 <div class="form-group" id="ImageInput">
 
-                  				<label class="custom-file-label" for="inputGroupFile" >Choose file</label>
-              				</div>
-            			</div>
+              <div class="input-group">
+                  <input 
+                  type="file"
+                  @change="onFileSelected" 
+                  class="custom-file-input"
+                  :class="{'is-invalid':$v.product.imageUrl.$error,'is-valid':!$v.product.imageUrl.$invalid}"
+                  >
 
 
-            			<button  type="button"  class="btn btn-success">Upload</button>
+                  <label class="custom-file-label" for="inputGroupFile" >Choose file</label>
+                  <span class="invalid-feedback" v-if="!$v.product.imageUrl.required">This field cannot be empty.</span>
+              </div>
+            </div>
+
+
+            			 <button class="btn btn-success" @click="createProduct()">Upload Post</button>
           			</div>
 
           		</div>
@@ -115,9 +121,35 @@
   		title:{required},
   		description:{required},
   		price:{required,integer},
-  		stock:{required,integer}
+  		stock:{required,integer},
+  		imageUrl:{required}
   	}
-  }
+  },
+  methods:{
+       onFileSelected(event){
+        this.product.imageUrl=event.target.files[0]
+      },
+      createProduct(){
+        this.$v.$touch()
+        if (!this.$v.$invalid) {
+        	const fd=new FormData();
+        	fd.append('title',this.product.title)
+        	fd.append('description',this.product.description)
+        	fd.append('price',this.product.price)
+        	fd.append('stock',this.product.stock)
+        	fd.append('imageUrl',this.product.imageUrl)
+
+        	this.axios.post('product/create',fd)
+          	.then(res => {
+            	alert('the product was created correctly')
+           	})
+          	.catch( e => {
+            	console.log(e)  
+          	})
+
+         }    
+      }
+    }
 };
 
 </script>
