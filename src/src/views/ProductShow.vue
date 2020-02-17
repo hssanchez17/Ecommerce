@@ -1,31 +1,42 @@
 <template>
 <div>
 	<div class="container">
-  		<div class="row row justify-content-md-center">
-  			<div class="col-md-8">
+  		<div class="row">
+
+  			<div class="col-md-8" id="leftColumn">
   				<div class="card">
-
-  					<div class="card-header d-flex justify-content-between align-items-center">
-  						<h2>{{product.title}}-{{product.price}} BS</h2>
-
-			          <div id="buttons">
-			            <button class="btn btn-info" id="btn-buy">Buy</button>
-			            <button class="btn btn-success" id="btn-car">Add to Car</button>
-			          </div>  
-
-
-  						
-  					</div>
-
-  					<div class="card-body">
-  						<div class="text-center">
-                			<img :src="product.imageurl" class="img-thumbnail" id="image">
-              			</div>
-
-              
-  					</div>
+  					
+              <img :src="product.imageurl" class="img-thumbnail" id="image">
+  					
   				</div>
   			</div>
+
+        <div class="col-md-4" id="rightColumn">
+
+          <div class="card">
+
+            <div class="card-body">
+              <h3 class="card-title"> {{product.title}}</h3> 
+              <h1> Bs {{product.price}}</h1>
+              <h3>Stock: {{product.stock}}</h3>
+
+              <div>
+                <p>{{product.description}}</p>
+              </div>
+
+              <div id="buttons">
+                <button class="btn btn-outline-dark">Buy</button>
+                <button class="btn btn-outline-dark">Add to cart</button>
+              </div>
+
+            </div>
+          </div>
+          
+        </div>
+
+
+
+
   		</div>
   	</div>	
 </div>
@@ -71,3 +82,24 @@ export default {
 
 
 </script>	
+
+<style>
+
+#leftColumn{
+  width:80%;  
+  height: auto;
+  padding: 20px;
+}
+
+
+#rightColumn{
+  padding: 20px;
+},
+
+.ProductTitle{
+  margin-bottom: 50px;
+  background:black;
+}
+
+
+</style>
