@@ -26,10 +26,24 @@ const getAll=async(req,res)=>{
 		res.send({products:products})
 	})
 	.catch(e => console.error(e.stack))
+}
 
+const get=async(req,res)=>{
+	const id=req.params.id
+	const text='SELECT * FROM products WHERE id=$1'
+	const value = [id]
+
+	database.query(text, value)
+    .then(response => {
+    	const product=response.rows[0]
+    	if(product==null) res.status(400).json("Error:that product doesn't exsist")
+    	else  res.send(product)
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
 }
 
 module.exports={
     create,
-    getAll
+    getAll,
+    get
 }

@@ -11,13 +11,19 @@ const routes = [
   },
 
 
-  //Product
+  //Products
 
-    {
+  {
     path: '/product/create',
     name: 'productCreate',
     component: () => import( '../views/ProductCreate.vue'),
   },
+
+  {
+    path:'/product/show/:id',
+    name:'productShow',
+    component:()=>import('../views/ProductShow.vue')
+  }
   
 ]
 

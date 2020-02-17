@@ -9,5 +9,6 @@ const upload = multer(storage)
 
 	router.post('/create',upload.single('imageUrl'),productController.create)
 	router.get('/show/all',productController.getAll)
+	router.get('/show/:id',productController.get)
 	
 module.exports = router;
