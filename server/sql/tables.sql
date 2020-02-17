@@ -17,3 +17,10 @@ CREATE TABLE Products(
    imageUrl VARCHAR NOT NULL,
    public_id VARCHAR NOT NULL
 );
+
+
+CREATE TABLE TypeOfProduct(
+   id SERIAL PRIMARY KEY,
+   title VARCHAR NOT NULL,
+   description TEXT NOT NULL
+);

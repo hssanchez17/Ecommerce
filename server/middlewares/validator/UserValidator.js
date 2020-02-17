@@ -1,17 +1,28 @@
 const { body, validationResult } = require('express-validator')
+const {database}=require('../../config/database')
+
 
 
 const userValidationRules = () => {
   return [
     body('email').isEmail().custom(email=>{
-      if(email==='hola@hola.com') return Promise.reject('Email already registered')
-      else return Promise.resolve()
+      const text='SELECT * FROM users WHERE email=$1'
+      const values = [email]
+
+       database.query(text, values)
+      .then(response => {
+        const user=response.rows[0]
+        console.log(user)
+        if (!user) return Promise.resolve()
+        else return Promise.reject('Email already registered')
+      });
+
     }),
     body('password').isLength({ min: 5 }),
   ]
 }
 
-const validate = (req, res, next) => {
+const validate = async(req, res, next) => {
   const errors = validationResult(req)
 
   if (errors.isEmpty()) return next()
