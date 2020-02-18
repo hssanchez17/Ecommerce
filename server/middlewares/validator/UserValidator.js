@@ -5,19 +5,21 @@ const {database}=require('../../config/database')
 
 const userValidationRules = () => {
   return [
-    body('email').isEmail().custom(email=>{
-      const text='SELECT * FROM users WHERE email=$1'
-      const values = [email]
+    body('email')
+      .isEmail()
+      .custom(email => {
+        return new Promise((resolve, reject) => {
+          const text='SELECT * FROM users WHERE email=$1'
+          const values = [email]
 
-       database.query(text, values)
-      .then(response => {
-        const user=response.rows[0]
-        console.log(user)
-        if (!user) return Promise.resolve()
-        else return Promise.reject('Email already registered')
-      });
-
-    }),
+          database.query(text, values)
+          .then(response => {
+            const user=response.rows[0]
+            if(Boolean(user)) reject(new Error('E-mail already in use'))
+            resolve(true)
+          })
+        });
+      }),
     body('password').isLength({ min: 5 }),
   ]
 }

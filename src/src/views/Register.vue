@@ -47,6 +47,10 @@
                   <span class="invalid-feedback" v-if="$v.userRegister.email.required && !submitEmail ">
                     Ingrese un email valido
                   </span>   
+
+                  <span class="invalid-feedback" v-if="!$v.userRegister.email.isUnique">
+                    Ya se encuentra en el sistema
+                  </span>
             </div>
 
             <div class="form-group" id="PasswordInput">
