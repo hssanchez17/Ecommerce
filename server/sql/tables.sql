@@ -24,3 +24,11 @@ CREATE TABLE TypeOfProduct(
    title VARCHAR NOT NULL,
    description TEXT NOT NULL
 );
+
+CREATE TABLE Carts(
+   id SERIAL PRIMARY KEY,
+   userId INTEGER,
+   productId INTEGER,
+   FOREIGN KEY (userId) REFERENCES Users(id),
+   FOREIGN KEY (productId) REFERENCES Products(id)
+)
