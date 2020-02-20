@@ -23,7 +23,7 @@ const addProduct= async(req,res)=>{
 
 const get=async(req,res)=>{
 	const userId=req.user.id
-	const text='SELECT title,description,price,stock,imageUrl,public_id FROM cartproducts JOIN products ON cartproducts.productId=products.id and cartproducts.userId=$1'
+	const text='SELECT Products.id,title,description,price,stock,imageUrl,public_id,quantity FROM cartproducts JOIN products ON cartproducts.productId=products.id and cartproducts.userId=$1'
 	const values = [userId]
 	
 	 database.query(text, values)

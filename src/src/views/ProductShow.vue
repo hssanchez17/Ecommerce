@@ -5,9 +5,7 @@
 
   			<div class="col-md-8" id="leftColumn">
   				<div class="card">
-  					
               <img :src="product.imageurl" class="img-thumbnail" id="image">
-  					
   				</div>
   			</div>
 
@@ -26,12 +24,12 @@
 
               <div id="buttons">
                 <button class="btn btn-outline-dark">Buy</button>
-                <button class="btn btn-outline-dark">Add to cart</button>
+                <button class="btn btn-outline-dark" @click="addProductToCart()">Add to cart</button>
               </div>
-
-            </div>
+            </div>            
           </div>
-          
+
+          <input id="QuantityInput" v-if="permissionToAddProductToCart"    class="form-control" type="text" placeholder="Enter the quantity" v-model="productToCart.quantity">
         </div>
 
 
@@ -58,7 +56,18 @@ export default {
       	stock:'',
       	imageUrl:''
       },
+
+      productToCart:{
+        quantity:'',
+        productId:this.$route.params.id
+      },
+
+      permissionToAddProductToCart:false,
+      permissionToBuyProduct:false,
+
       id:this.$route.params.id,
+
+
     }
   },
 
@@ -75,6 +84,10 @@ export default {
         .catch((e)=>{
           console.log('error' + e);
         })
+      },
+
+      addProductToCart(){
+        this.permissionToAddProductToCart=true
       }
     }
 

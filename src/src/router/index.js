@@ -10,11 +10,22 @@ const routes = [
     component: () => import( '../views/Home.vue'),
   },
 
+  //AUTH
+
+
   {
     path:'/register',
     name:'Register',
     component:()=> import('../views/Register.vue')
   },
+
+  {
+    path:'/login',
+    name:'Login',
+    component:()=>import('../views/Login.vue')
+  },
+
+
 
   //Products
 
@@ -28,6 +39,14 @@ const routes = [
     path:'/product/show/:id',
     name:'productShow',
     component:()=>import('../views/ProductShow.vue')
+  },
+
+  //CART
+
+  {
+    path:'/cart',
+    name:'cartShow',
+    component:()=>import('../views/CartShow.vue')
   }
   
 ]
