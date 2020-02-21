@@ -7,14 +7,16 @@
                 	<h1 class="card-header">Cart</h1>
 
                 	<div class="card-body">
+                    <div class="table-responsive">
                 		<table class='table table-striped'>
                 			<thead>
                             	<tr>
                             		<th scope="col">Id</th>
                                     <th scope="col">Product</th>
-                             	    <th scope="col">Description</th>
+                             	      <th scope="col">Description</th>
                                     <th scope="col">Quantity</th>
                           	      	<th scope="col">Price</th>
+                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                             	<tr v-for="product in listOfProducts">
@@ -25,9 +27,13 @@
                             		<td>{{product.description}}</td>
                             		<td>{{product.quantity}}</td>
                             		<td>{{product.price}}</td>
+                                <td>
+                                  <button class="btn btn-success" @click="increaseTheQuantityOfTheProduct(product)">Increase</button>
+                                </td>
                             	</tr>
                 			
                 		</table>
+                    </div>
                 		
                 	</div>
                 </div>
@@ -70,7 +76,11 @@ export default {
           console.log('error' + e);
         })
       
-  	}
+  	},
+
+    increaseTheQuantityOfTheProduct(product){
+      console.log(product)
+    }
  
   }
 }
@@ -78,12 +88,11 @@ export default {
 
 
 <style>
-      #productPicture{
+
+
+#productPicture{
     width: 90px; 
     height: 90px;
-},
-* {
-  box-sizing: border-box;
 }
 </style>
 
