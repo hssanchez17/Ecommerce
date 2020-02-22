@@ -5,7 +5,6 @@ const {Product}=require('../models/Product.js')
 class ProductController{
 
 	create(req,res){
-		console.log(req.file)
 		cloudinary.uploadImage(req.file)
 		.then(function(result){
 		    const {title,description,price,stock}=req.body
@@ -25,7 +24,8 @@ class ProductController{
 	getAll(req,res){
 		const product= new Product
 		product.getAll()
-		.then(function(products){ res.status(200)({products:products})})
+		.then(function(products){ res.status(200).json({products:products})})
+		.catch(e => console.error(e.stack))
 	}
 
 	get(req,res){

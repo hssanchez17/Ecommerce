@@ -23,9 +23,7 @@ class User{
            .catch(e => console.error(e.stack))
       
        	})
-    }
-
-	
+    }	
 }
 
 

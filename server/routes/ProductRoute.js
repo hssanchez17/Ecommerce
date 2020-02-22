@@ -8,16 +8,10 @@ const upload = multer(storage)
 
 var productController= new ProductController
 
-router.post('/create',productValidationRules(),validate,upload.single('imageUrl'),function(req,res){
-	productController.create(req,res)
-})
+router.post('/create',upload.single('imageUrl'),productValidationRules(), validate,productController.create)
 
-router.get('/show/all',function(req,res){
-	productController.getAll(req,res)
-})
+router.get('/show/all',productController.getAll)
 	
-router.get('/show/:id',function(req,res){
-	productController.get(req,res)
-})
+router.get('/show/:id',productController.get)
 	
 module.exports = router;
