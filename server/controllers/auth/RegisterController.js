@@ -6,9 +6,8 @@ const register= async(req,res)=>{
     password= await hashPassword(password)
 
     const user= new User(name,lastName,email,phone,password,address,password)
-    console.log (await user.create())
-    //if(user.create())res.status(200).json('registro Exitoso')
-    //res.send({user:user})
+    user.create()
+    .then(function(){res.status(200).json('success fulregistration')})
 }
 
 module.exports={

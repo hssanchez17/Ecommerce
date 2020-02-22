@@ -2,23 +2,18 @@ const { body, validationResult } = require('express-validator')
 
 const productValidationRules = () => {
   return [
-    body('title')
-      .not().isEmpty().withMessage("It can't be empty"),
-    body('description')
-      .not().isEmpty().withMessage("It can't be empty"),
+    body('title').not().isEmpty().withMessage("It can't be empty"),
+    body('description').not().isEmpty().withMessage("It can't be empty"),
     body('imageUrl')
       .not().isEmpty().withMessage("It can't be empty"),
-    body('stock')
-      .isInt().withMessage("It should be integer")
-      .not().isEmpty().withMessage("It can't be empty"),
-    body('price')
-      .isInt().withMessage("It should be integer")
-      .not().isEmpty().withMessage("It can't be empty"),
+    body('stock').isInt().withMessage("It should be integer").not().isEmpty().withMessage("It can't be empty"),
+    body('price').isInt().withMessage("It should be integer").not().isEmpty().withMessage("It can't be empty"),
 
   ]
 }
 
 const validate = (req, res, next) => {
+  console.log(body)
   const errors = validationResult(req)
 
   if (errors.isEmpty()) return next()

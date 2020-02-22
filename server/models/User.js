@@ -22,9 +22,11 @@ class User{
            .then(function(){resolve(true)})
            .catch(e => console.error(e.stack))
       
-          })
-        }
-	}
+       	})
+    }
+
+	
+}
 
 
 
