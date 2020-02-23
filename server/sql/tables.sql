@@ -29,6 +29,7 @@ CREATE TABLE Carts(
    id SERIAL PRIMARY KEY,
    userId INTEGER,
    productId INTEGER,
+   quantity INTEGER,
    FOREIGN KEY (userId) REFERENCES Users(id),
    FOREIGN KEY (productId) REFERENCES Products(id)
 )
