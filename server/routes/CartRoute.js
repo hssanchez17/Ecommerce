@@ -1,18 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const cartController= require('../controllers/CartController')
-
-
-router.post('/create',cartController.create)
-router.post('/add-product',cartController.addProduct)
-router.get('/show',cartController.get)
-
-
-const {CartController}= require('../controllers/CartController.js')
-
+const {CartController}= require('../controllers/CartController')
 
 var cartController= new CartController
 
 router.post('/register-product/:id',cartController.registerAProduct)
+router.get('/show',cartController.getAllProductsFromACart)
+router.get('/permission-to-add-to-cart/:productId',cartController.getPermissionToAddToCart)
 
 module.exports = router;

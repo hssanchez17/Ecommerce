@@ -71,7 +71,8 @@ export default {
   },
 
   mounted(){
-  	this.getProduct()
+  	this.getProduct(),
+    this.getPermissionToAddToCart()
   },
 
   methods:{
@@ -85,8 +86,19 @@ export default {
         })
       },
 
+      getPermissionToAddToCart(){
+        this.axios.get(`cart/permission-to-add-to-cart/${this.id}`)
+        .then((response) => {
+         this.permissionToAddToCart=response.data.permission
+        })
+        .catch((e)=>{
+          console.log('error' + e);
+        })
+        
+
+      },
+
       addToCart(){
-        console.log('hola')
         this.axios.post(`cart/register-product/${this.id}`)
         .then((response) => {
           this.permissionToAddToCart=false
