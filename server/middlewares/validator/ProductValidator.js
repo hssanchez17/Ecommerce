@@ -1,19 +1,13 @@
-const { body, validationResult } = require('express-validator')
+const { body, validationResult,file } = require('express-validator')
 
 const productValidationRules = () => {
   return [
-    body('title')
-      .not().isEmpty().withMessage("It can't be empty"),
-    body('description')
-      .not().isEmpty().withMessage("It can't be empty"),
-    body('imageUrl')
-      .not().isEmpty().withMessage("It can't be empty"),
-    body('stock')
-      .isInt().withMessage("It should be integer")
-      .not().isEmpty().withMessage("It can't be empty"),
-    body('price')
-      .isInt().withMessage("It should be integer")
-      .not().isEmpty().withMessage("It can't be empty"),
+    body('title').not().isEmpty().withMessage("It can't be empty"),
+    body('description').not().isEmpty().withMessage("It can't be empty"),
+    //body('imageUrl').not().isEmpty().withMessage("It can't be empty"),
+    //I need to validate the file, but express-validator doesn't support it
+    body('stock').isInt().withMessage("It should be integer").not().isEmpty().withMessage("It can't be empty"),
+    body('price').isInt().withMessage("It should be integer").not().isEmpty().withMessage("It can't be empty"),
 
   ]
 }

@@ -24,7 +24,7 @@
 
               <div id="buttons">
                 <button class="btn btn-outline-dark">Buy</button>
-                <button class="btn btn-outline-dark" @click="addProductToCart()">Add to cart</button>
+                <button class="btn btn-outline-dark" @click="addToCart()" v-if="permissionToAddToCart">Add to cart</button>
               </div>
             </div>            
           </div>
@@ -66,8 +66,7 @@ export default {
       permissionToBuyProduct:false,
 
       id:this.$route.params.id,
-
-
+      permissionToAddToCart:true
     }
   },
 
@@ -86,8 +85,15 @@ export default {
         })
       },
 
-      addProductToCart(){
-        this.permissionToAddProductToCart=true
+      addToCart(){
+        console.log('hola')
+        this.axios.post(`cart/register-product/${this.id}`)
+        .then((response) => {
+          this.permissionToAddToCart=false
+        })
+        .catch((e)=>{
+          console.log('error' + e);
+        })
       }
     }
 
@@ -107,7 +113,7 @@ export default {
 
 #rightColumn{
   padding: 20px;
-},
+}
 
 .ProductTitle{
   margin-bottom: 50px;
