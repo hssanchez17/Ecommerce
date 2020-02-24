@@ -7,8 +7,8 @@ const multer = require('multer')
 const upload = multer(storage)
 
 var productController= new ProductController
-
-router.post('/create',upload.single('imageUrl'),productValidationRules(), validate,productController.create)
+//Para que 
+router.post('/create',productValidationRules(),validate,upload.single('imageUrl'),productController.create)
 
 router.get('/show/all',productController.getAll)
 	
