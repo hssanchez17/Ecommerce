@@ -6,7 +6,7 @@ class Cart{
 	constructor(userId,productId,quantity){
 		this.userId=userId;
 		this.productId=productId;
-		this.quantity=quantity
+		this.quantity=1
 	}
 
 	registerAProduct(){
@@ -46,7 +46,44 @@ class Cart{
 			})
 
 		})
+	}
+
+	increaseTheQuantityOfTheProduct(productId,userId){
+		return new Promise((resolve, reject) => {
+			const query='UPDATE carts SET quantity=quantity+1 WHERE productId=$1 AND userId=$2'
+			const values=[productId,userId]
+
+			database.query(query, values)
+			.then(function(){resolve(true)})
+			.catch(e => console.error(e.stack))
+
+		})
+	}
+
+	decreaseTheQuantityOfTheProduct(productId,userId){
+		return new Promise((resolve, reject) => {
+			const query='UPDATE carts SET quantity=quantity-1 WHERE productId=$1 AND userId=$2'
+			const values=[productId,userId]
+
+			database.query(query, values)
+			.then(function(){resolve(true)})
+			.catch(e => console.error(e.stack))
+
+		})
+	}
+
+	removeAProductFromTheCart(productId,userId){
+		return new Promise((resolve, reject) => {
+			const query= 'DELETE FROM carts WHERE productId=$1 AND userId=$2'
+			const values=[productId,userId]
+			
+			database.query(query, values)
+			.then(function(){resolve(true)})
+			.catch(e => console.error(e.stack))
+		})
 
 	}
+
+
 }
 module.exports={Cart}

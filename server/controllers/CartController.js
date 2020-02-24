@@ -30,7 +30,30 @@ class CartController{
 			res.send({permission:permission})
 		})
 		.catch(e => console.error(e.stack))
+	}
 
+	increaseTheQuantityOfTheProduct(req,res){
+		const cart= new Cart
+
+		cart.increaseTheQuantityOfTheProduct(req.params.productId,req.user.id)
+		.then(function(){res.status(200).json('successful increase the quantity')})
+		.catch(e => console.error(e.stack))
+	}
+
+	decreaseTheQuantityOfTheProduct(req,res){
+		const cart= new Cart
+
+		cart.decreaseTheQuantityOfTheProduct(req.params.productId,req.user.id)
+		.then(function(){res.status(200).json('successful increase the quantity')})
+		.catch(e => console.error(e.stack))
+	}
+
+	removeAProductFromTheCart(req,res){
+		const cart= new Cart
+
+		cart.removeAProductFromTheCart(req.params.productId,req.user.id)
+		.then(function(){res.status(200).json('successful increase the quantity')})
+		.catch(e => console.error(e.stack))
 	}
 }
 

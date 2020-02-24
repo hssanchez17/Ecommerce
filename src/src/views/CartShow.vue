@@ -2,7 +2,7 @@
   <div class="home">
   	<div class="container">
     	<div class="row justify-content-center">
-        	<div class="col-md-9">
+        	<div class="col-md-12">
             	<div class="card">
                 	<h1 class="card-header">Cart</h1>
 
@@ -16,6 +16,10 @@
                              	      <th scope="col">Description</th>
                                     <th scope="col">Quantity</th>
                           	      	<th scope="col">Price</th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col">Stock</th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
@@ -26,10 +30,26 @@
                             		</td>
                             		<td>{{product.description}}</td>
                             		<td>{{product.quantity}}</td>
-                            		<td>{{product.price}}</td>
+                            		<td>{{product.price}} </td>
                                 <td>
-                                  <button class="btn btn-success" @click="increaseTheQuantityOfTheProduct(product)">Increase</button>
+                                  {{totalPrice(product)}}
                                 </td>
+                                <td>{{product.stock}}</td>
+                                <td>
+                                  <div id="ButtonsLabel">
+                                    <button class="btn btn-success" @click="increaseTheQuantityOfTheProduct(product)" :disabled="product.stock<=product.quantity">Increase</button>
+                                
+                                  </div>
+                                </td>
+
+                                <td>
+                                   <button class="btn btn-danger" @click="decreaseTheQuantityOfTheProduct(product)" :disabled="product.quantity<2">Decrease</button>
+                                </td>
+
+                                <td>
+                                   <button class="btn btn-warning" @click="removeAProductFromTheCart(product)">Remove</button>
+                                </td>
+                                  
                             	</tr>
                 			
                 		</table>
@@ -70,7 +90,6 @@ export default {
   		this.axios.get(`cart/show`)
   		.then((response) => {
           this.listOfProducts= response.data.cart;
-          console.log(this.listOfProducts)
         })
         .catch((e)=>{
           console.log('error' + e);
@@ -79,7 +98,40 @@ export default {
   	},
 
     increaseTheQuantityOfTheProduct(product){
-      console.log(product)
+
+      this.axios.post(`cart/increase-product/${product.id}`)
+      .then((response) => {
+          product.quantity++
+        })
+        .catch((e)=>{
+          console.log('error' + e);
+        })
+    },
+
+    decreaseTheQuantityOfTheProduct(product){
+      this.axios.post(`cart/decrease-product/${product.id}`)
+      .then((response) => {
+          product.quantity--
+        })
+        .catch((e)=>{
+          console.log('error' + e);
+        })
+
+    },
+
+    removeAProductFromTheCart(product){
+      this.axios.post(`cart/remove-product/${product.id}`)
+      .then((response) => {
+        alert('Your product has been removed')
+      })
+      .catch((e)=>{
+        console.log('error' + e);
+      })
+
+    },
+
+    totalPrice(product){
+      return product.price*product.quantity
     }
  
   }
