@@ -51,6 +51,19 @@ class Product{
 		})
 	}
 
+	updateStock(id,quantity){
+		return new Promise((resolve, reject) => {
+			const query='UPDATE products SET stock=stock-$1 WHERE id=$2'
+			const values=[quantity,id]
+
+			database.query(query, values)
+			.then(function(){resolve(true)})
+			.catch(e => console.error(e.stack))
+
+		})
+
+	}
+
 }
 
 module.exports={Product}

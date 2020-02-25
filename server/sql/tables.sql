@@ -33,3 +33,13 @@ CREATE TABLE Carts(
    FOREIGN KEY (userId) REFERENCES Users(id),
    FOREIGN KEY (productId) REFERENCES Products(id)
 )
+
+CREATE TABLE Orders(
+   id SERIAL PRIMARY KEY,
+   userId INTEGER,
+   productId INTEGER,
+   quantity INTEGER,
+   FOREIGN KEY (userId) REFERENCES Users(id),
+   FOREIGN KEY (productId) REFERENCES Products(id)
+)
+
