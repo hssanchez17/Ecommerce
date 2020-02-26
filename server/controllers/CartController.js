@@ -51,7 +51,7 @@ class CartController{
 	removeAProductFromTheCart(req,res){
 		const cart= new Cart
 
-		cart.removeAProductFromTheCart(req.params.productId,req.user.id)
+		cart.removeAProductFromTheCart(req.params.productId)
 		.then(function(){res.status(200).json('successful increase the quantity')})
 		.catch(e => console.error(e.stack))
 	}

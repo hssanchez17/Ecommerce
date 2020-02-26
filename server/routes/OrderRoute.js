@@ -5,7 +5,8 @@ const {OrderController}= require('../controllers/OrderController')
 
 var orderController= new OrderController
 
-router.post('/create/:productId',orderController.createAnOrderFromTheCart)
+router.post('/buy/product/from-cart/:productId',orderController.createAnOrderFromTheCart)
+router.post('/buy/:productId',orderController.create)
 
 
 module.exports = router;

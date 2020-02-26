@@ -21,6 +21,7 @@
                                     <th scope="col"></th>
                                     <th scope="col"></th>
                                     <th scope="col"></th>
+                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                             	<tr v-for="product in listOfProducts">
@@ -48,6 +49,10 @@
 
                                 <td>
                                    <button class="btn btn-warning" @click="removeAProductFromTheCart(product)">Remove</button>
+                                </td>
+
+                                <td>
+                                   <button class="btn btn-info" @click="buyAProduct(product)">Buy</button>
                                 </td>
                                   
                             	</tr>
@@ -132,6 +137,18 @@ export default {
 
     totalPrice(product){
       return product.price*product.quantity
+    },
+
+    buyAProduct(product){
+      this.axios.post(`order/buy/product/from-cart/${product.id}`,product)
+      .then((response) => {
+
+        alert('Your bought the product')
+      })
+      .catch((e)=>{
+        console.log('error' + e);
+      })
+
     }
  
   }
