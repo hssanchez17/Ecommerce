@@ -24,7 +24,7 @@
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
-                            	<tr v-for="product in listOfProducts">
+                            	<tr v-for="(product,index) in listOfProducts" :key="index"> 
                             		<td>{{product.id}}</td>
                             		<td>
                             			<img :src="product.imageurl"  id="productPicture">
@@ -48,11 +48,11 @@
                                 </td>
 
                                 <td>
-                                   <button class="btn btn-warning" @click="removeAProductFromTheCart(product)">Remove</button>
+                                   <button class="btn btn-warning" @click="removeAProductFromTheCart(product,index)">Remove</button>
                                 </td>
 
                                 <td>
-                                   <button class="btn btn-info" @click="buyAProduct(product)">Buy</button>
+                                   <button class="btn btn-info" @click="buyAProduct(product,index)">Buy</button>
                                 </td>
                                   
                             	</tr>
@@ -124,9 +124,11 @@ export default {
 
     },
 
-    removeAProductFromTheCart(product){
+    removeAProductFromTheCart(product,index){
       this.axios.post(`cart/remove-product/${product.id}`)
       .then((response) => {
+        this.listOfProducts.splice(index, 1);
+
         alert('Your product has been removed')
       })
       .catch((e)=>{
@@ -139,9 +141,10 @@ export default {
       return product.price*product.quantity
     },
 
-    buyAProduct(product){
+    buyAProduct(product,index){
       this.axios.post(`order/buy/product/from-cart/${product.id}`,product)
       .then((response) => {
+        this.listOfProducts.splice(index, 1);
 
         alert('Your bought the product')
       })
