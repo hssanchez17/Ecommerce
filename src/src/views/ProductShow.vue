@@ -11,7 +11,7 @@
 
         <div class="col-md-4" id="rightColumn">
 
-          <div class="card">
+          <div class="card" v-if="!permissionToUpdate">
 
             <div class="card-body">
               <h3 class="card-title"> {{product.title}}</h3> 
@@ -23,10 +23,76 @@
               </div>
 
               <div id="buttons">
-                <button class="btn btn-outline-dark">Buy</button>
+                <button class="btn btn-outline-dark" v-if="product.stock>0">Buy</button>
                 <button class="btn btn-outline-dark" @click="addToCart()" v-if="permissionToAddToCart">Add to cart</button>
               </div>
             </div>            
+          </div>
+
+          <div class="card" v-if="permissionToUpdate">
+            <div class="card-body">
+
+              <div class="form-group" id="TitleInput">
+
+                <input 
+                class="form-control"
+                type="text" 
+                placeholder="New title for the product" 
+                v-model.trim="$v.productToUpdate.title.$model"  
+                :class="{'is-invalid':$v.productToUpdate.title.$error,'is-valid':!$v.productToUpdate.title.$invalid}"
+                >
+
+                <span class="invalid-feedback" v-if="!$v.productToUpdate.title.required">Este campo no puede ser vacio</span>
+                <span  class="invalid-feedback"  v-if="!$v.productToUpdate.title.maxLength">El titulo no puedde pasar de 35 caracteres</span> 
+              </div>
+
+              <div class="form-group" id="PriceInput">
+
+                <input 
+                class="form-control"
+                type="text" 
+                placeholder="New Price for the product" 
+                v-model.trim="$v.productToUpdate.price.$model"  
+                :class="{'is-invalid':$v.productToUpdate.price.$error,'is-valid':!$v.productToUpdate.price.$invalid}"
+                >
+                
+                <span class="invalid-feedback" v-if="!$v.productToUpdate.price.required">Este campo no puede ser vacio</span>
+
+                <span class="invalid-feedback" v-if="!$v.productToUpdate.price.integer">It should be integer</span>
+
+                <span class="invalid-feedback" v-if="!$v.productToUpdate.price.minValue">It must be greater than zero. </span>
+              </div>
+
+              <div class="form-group" id="StockInput">
+
+                <input 
+                class="form-control"
+                type="text" 
+                placeholder="New Stock for the product" 
+                v-model.trim="$v.productToUpdate.stock.$model"  
+                :class="{'is-invalid':$v.productToUpdate.stock.$error,'is-valid':!$v.productToUpdate.stock.$invalid}"
+                >
+                
+                <span class="invalid-feedback" v-if="!$v.productToUpdate.stock.required">Este campo no puede ser vacio</span>
+
+                <span class="invalid-feedback" v-if="!$v.productToUpdate.stock.integer">It should be integer</span>
+
+                <span class="invalid-feedback" v-if="!$v.productToUpdate.stock.minValue">It must be greater than zero. </span>
+              
+
+              </div class="form-group" id="DescriptionInput">
+                <textarea
+                class="form-control"
+                placeholder="New Description for the product" 
+                v-model.trim="$v.productToUpdate.description.$model" 
+                :class="{'is-invalid':$v.productToUpdate.description.$error,'is-valid':!$v.productToUpdate.description.$invalid}"
+                ></textarea> 
+
+               <span class="invalid-feedback" v-if="$v.productToUpdate.description.required">Este campo no puede ser vacio</span> 
+              </div> 
+
+        </div>
+
           </div>
 
           <input id="QuantityInput" v-if="permissionToAddProductToCart"    class="form-control" type="text" placeholder="Enter the quantity" v-model="productToCart.quantity">
@@ -42,6 +108,7 @@
 </template>
 
 <script>
+  import {required,maxLength,integer,minValue} from 'vuelidate/lib/validators'
 
 export default {
   name: 'Home',
@@ -62,13 +129,47 @@ export default {
         productId:this.$route.params.id
       },
 
+      productToUpdate:{
+        title:'',
+        description:'',
+        price:'',
+        stock:''
+      },
+
       permissionToAddProductToCart:false,
       permissionToBuyProduct:false,
+
+      permissionToUpdate:false,
 
       id:this.$route.params.id,
       permissionToAddToCart:true
     }
   },
+
+  validations:{
+      productToUpdate:{
+        title: {
+            required,
+            maxLength:maxLength(35)
+          },
+
+        price:{
+          required,
+          integer,
+          minValue:minValue(0)
+        },
+
+        stock:{
+          required,
+          integer,
+          minValue:minValue(0)
+        },
+        description:{
+          required
+
+        }
+      }
+     },
 
   mounted(){
   	this.getProduct(),
@@ -80,6 +181,7 @@ export default {
         this.axios.get(`product/show/${this.id}`)
         .then((response) => {
           this.product= response.data;
+          this.productToUpdate=response.data
         })
         .catch((e)=>{
           console.log('error' + e);
