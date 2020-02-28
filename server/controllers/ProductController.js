@@ -46,10 +46,9 @@ class ProductController{
 		const {title,description,price,stock}=req.body
 		const id=req.params.id
 		const product= new Product(title,description,price,stock,'','')
+		
 		product.update(id)
-		.then(function(product){
-			res.status(200).json('successful product update')
-		})
+		.then(function(product){res.status(200).json('successful product update')})
 		.catch(e => console.error(e.stack))
 
 	}
@@ -60,17 +59,13 @@ class ProductController{
 		const order= new Order()
 		const cart= new Cart()
 
-		//Utilizar promise.all
-		cart.removeAllProductsFromAllCartsForDestructionOfAProduct(id)
-		.then(function(){
-			order.removeAllProductsFromAllOrdersForDestructionOfAProduct(id)
-			.then(function(){
-				product.destroy(id)
-				.then(function(){
-					res.status(200).json('successful product destroyed')
-				})
-			})
-		})
+		var p1=cart.removeAllProductsFromAllCartsForDestructionOfAProduct(id)
+		var p2=order.removeAllProductsFromAllOrdersForDestructionOfAProduct(id)
+		var p3=product.destroy(id)
+
+		Promise.all([p1, p2, p3])
+		.then(function(){res.status(200).json('successful product destroyed')})
+		.catch(e => console.error(e.stack))
 
 	}
 }
