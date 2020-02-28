@@ -15,5 +15,7 @@ router.get('/show/all',productController.getAll)
 router.get('/show/:id',productController.get)
 
 router.put('/update/:id',productController.update)
+
+router.delete('/destroy/:id',productController.destroy)
 	
 module.exports = router;

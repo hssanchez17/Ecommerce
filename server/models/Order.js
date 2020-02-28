@@ -19,6 +19,19 @@ class Order{
 			
 		})
 	}
+
+	removeAllProductsFromAllOrdersForDestructionOfAProduct(productId){
+
+		return new Promise((resolve, reject) => {
+			const query= 'DELETE FROM orders WHERE productId=$1'
+			const values=[productId]
+			
+			database.query(query, values)
+			.then(function(){resolve(true)})
+			.catch(e => console.error(e.stack))
+		})
+
+	}
 }
 
 module.exports={Order}

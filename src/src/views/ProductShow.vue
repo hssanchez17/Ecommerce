@@ -25,9 +25,10 @@
               <div class="form-group" id="buttons">
                 <button class="btn btn-outline-dark" v-if="product.stock>0">Buy</button>
                 <button class="btn btn-outline-dark" @click="addToCart()" v-if="permissionToAddToCart">Add to cart</button>
-                <button class="btn btn-success" @click="clickToUpdate()">Update</button>
               </div>
 
+                 <button class="btn btn-success" @click="clickToUpdate()">Update</button>
+             
             </div>            
           </div>
 
@@ -222,17 +223,23 @@ export default {
       },
 
       clickToUpdate(){
-      this.productToUpdate=this.product 
+        this.productToUpdate.title=this.product.title
+        this.productToUpdate.description=this.product.description
+        this.productToUpdate.price=this.product.price
+        this.productToUpdate.stock=this.product.stock
         this.permissionToUpdate=true
-
-
+        console.log(this.productToUpdate)
       },
 
       updateProduct(){
 
         this.axios.put(`/product/update/${this.id}`,this.productToUpdate)
         .then((response) => {
-          alert('Product updated')
+          this.product.title=this.productToUpdate.title
+          this.product.description=this.productToUpdate.description
+          this.product.price=this.productToUpdate.price
+          this.product.stock=this.productToUpdate.stock
+           alert('Product updated')
            this.permissionToUpdate=false
         })
         .catch((e)=>{

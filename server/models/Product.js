@@ -73,7 +73,18 @@ class Product{
 			.catch(e => console.error(e.stack))
 
 		})
+	}
 
+
+	destroy(id){
+		return new Promise((resolve, reject) => {
+			const query= 'DELETE FROM products WHERE id=$1'
+			const values=[id]
+			
+			database.query(query, values)
+			.then(function(){resolve(true)})
+			.catch(e => console.error(e.stack))
+		})
 	}
 
 }

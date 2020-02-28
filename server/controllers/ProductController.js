@@ -1,6 +1,8 @@
 'use strict';
 const cloudinary = require('../middlewares/cloudinary');
+const {Order}=require('../models/Order.js')
 const {Product}=require('../models/Product.js')
+const {Cart}=require('../models/Cart.js')
 
 class ProductController{
 
@@ -49,6 +51,26 @@ class ProductController{
 			res.status(200).json('successful product update')
 		})
 		.catch(e => console.error(e.stack))
+
+	}
+
+	destroy(req,res){
+		const id=req.params.id
+		const product= new Product()
+		const order= new Order()
+		const cart= new Cart()
+
+		//Utilizar promise.all
+		cart.removeAllProductsFromAllCartsForDestructionOfAProduct(id)
+		.then(function(){
+			order.removeAllProductsFromAllOrdersForDestructionOfAProduct(id)
+			.then(function(){
+				product.destroy(id)
+				.then(function(){
+					res.status(200).json('successful product destroyed')
+				})
+			})
+		})
 
 	}
 }
