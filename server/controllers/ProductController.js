@@ -37,6 +37,19 @@ class ProductController{
 			if(product==null) res.status(200).json("Error:that product doesn't exsist")
 	    	else  res.send(product)
 		})
+		.catch(e => console.error(e.stack))
+	}
+
+	update(req,res){
+		const {title,description,price,stock}=req.body
+		const id=req.params.id
+		const product= new Product(title,description,price,stock,'','')
+		product.update(id)
+		.then(function(product){
+			res.status(200).json('successful product update')
+		})
+		.catch(e => console.error(e.stack))
+
 	}
 }
 

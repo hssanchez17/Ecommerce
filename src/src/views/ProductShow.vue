@@ -22,10 +22,12 @@
                 <p>{{product.description}}</p>
               </div>
 
-              <div id="buttons">
+              <div class="form-group" id="buttons">
                 <button class="btn btn-outline-dark" v-if="product.stock>0">Buy</button>
                 <button class="btn btn-outline-dark" @click="addToCart()" v-if="permissionToAddToCart">Add to cart</button>
+                <button class="btn btn-success" @click="clickToUpdate()">Update</button>
               </div>
+
             </div>            
           </div>
 
@@ -89,6 +91,11 @@
                 ></textarea> 
 
                <span class="invalid-feedback" v-if="$v.productToUpdate.description.required">Este campo no puede ser vacio</span> 
+              </div>
+
+              <div class="form-group" id="Buttons">
+                 <button class="btn btn-success" @click="updateProduct()">Update</button>
+                 <button class="btn btn-danger" @click="cancelTheUpdate()">Cancel</button>
               </div> 
 
         </div>
@@ -181,7 +188,6 @@ export default {
         this.axios.get(`product/show/${this.id}`)
         .then((response) => {
           this.product= response.data;
-          this.productToUpdate=response.data
         })
         .catch((e)=>{
           console.log('error' + e);
@@ -208,6 +214,31 @@ export default {
         .catch((e)=>{
           console.log('error' + e);
         })
+      },
+
+      cancelTheUpdate(){ 
+        this.permissionToUpdate=false
+
+      },
+
+      clickToUpdate(){
+      this.productToUpdate=this.product 
+        this.permissionToUpdate=true
+
+
+      },
+
+      updateProduct(){
+
+        this.axios.put(`/product/update/${this.id}`,this.productToUpdate)
+        .then((response) => {
+          alert('Product updated')
+           this.permissionToUpdate=false
+        })
+        .catch((e)=>{
+          console.log('error' + e);
+        })
+
       }
     }
 

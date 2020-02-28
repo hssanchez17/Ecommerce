@@ -13,5 +13,7 @@ router.post('/create',productValidationRules(),validate,upload.single('imageUrl'
 router.get('/show/all',productController.getAll)
 	
 router.get('/show/:id',productController.get)
+
+router.put('/update/:id',productController.update)
 	
 module.exports = router;
