@@ -5,8 +5,6 @@ class CartController{
 
 	registerAProduct(req,res){
 		const productId=req.params.id
-
-
 		const cart= new Cart(req.user.id,productId,1)
 
 		cart.registerAProduct()
@@ -15,7 +13,7 @@ class CartController{
 	}
 
 	getAllProductsFromACart(req,res){
-		const cart= new Cart
+		const cart= new Cart()
 
 		cart.getAllProductsFromACart(req.user.id)
 		.then(function(cart){res.send({cart:cart})})
@@ -23,17 +21,15 @@ class CartController{
 	}
 
 	getPermissionToAddToCart(req,res){
-		const cart= new Cart
+		const cart= new Cart()
 
 		cart.getPermissionToAddToCart(req.user.id,req.params.productId)
-		.then(function(permission){
-			res.send({permission:permission})
-		})
+		.then(function(permission){res.send({permission:permission})})
 		.catch(e => console.error(e.stack))
 	}
 
 	increaseTheQuantityOfTheProduct(req,res){
-		const cart= new Cart
+		const cart= new Cart()
 
 		cart.increaseTheQuantityOfTheProduct(req.params.productId,req.user.id)
 		.then(function(){res.status(200).json('successful increase the quantity')})
@@ -41,7 +37,7 @@ class CartController{
 	}
 
 	decreaseTheQuantityOfTheProduct(req,res){
-		const cart= new Cart
+		const cart= new Cart()
 
 		cart.decreaseTheQuantityOfTheProduct(req.params.productId,req.user.id)
 		.then(function(){res.status(200).json('successful increase the quantity')})
@@ -49,7 +45,7 @@ class CartController{
 	}
 
 	removeAProductFromTheCart(req,res){
-		const cart= new Cart
+		const cart= new Cart()
 
 		cart.removeAProductFromTheCart(req.params.productId,req.user.id)
 		.then(function(){res.status(200).json('successful increase the quantity')})

@@ -24,7 +24,7 @@ class ProductController{
 	}
 
 	getAll(req,res){
-		const product= new Product
+		const product= new Product()
 		product.getAll()
 		.then(function(products){ res.status(200).json({products:products})})
 		.catch(e => console.error(e.stack))
@@ -32,7 +32,7 @@ class ProductController{
 
 	get(req,res){
 		const id=req.params.id
-		const product= new Product
+		const product= new Product()
 
 		product.get(id)
 		.then(function(product){

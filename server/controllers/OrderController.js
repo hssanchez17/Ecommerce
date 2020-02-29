@@ -13,15 +13,13 @@ class OrderController{
 		const order= new Order(req.user.id,productId,quantity)
 		const product= new Product
 
-		order.create()
-		.then(function(){
-			product.updateStock(productId,quantity)
-			.then(function(){
-				res.status(200).json('successful order registration')	
-			})
-		})
-		.catch(e => console.error(e.stack))
 
+		const p1=order.create()
+		const p2=product.updateStock(productId,quantity)
+
+		Promise.all([p1, p2])
+		.then(function(){res.status(200).json('successful order registration')})
+		.catch(e => console.error(e.stack))
 	}
 
 
@@ -34,16 +32,12 @@ class OrderController{
 		const product= new Product
 		const cart=new Cart
 
-		order.create()
-		.then(function(){
-			product.updateStock(productId,quantity)
-			.then(function(){
-				cart.removeAProductFromTheCart(productId,req.user.id)
-				.then(function(){
-					res.status(200).json('successful order registration')
-				})
-			})
-		})
+		const p1=order.create()
+		const p2=product.updateStock(productId,quantity)
+		const p3=cart.removeAProductFromTheCart(productId,req.user.id)
+
+		Promise.all([p1, p2,p3])
+		.then(function(){res.status(200).json('successful order registration')})
 		.catch(e => console.error(e.stack))
 	}
 

@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-
+    <Navbar></Navbar>
         <div class="container">
      <div class="row" id="listOfProducts">
         <div class="col-md-4"  v-for="product in listOfProducts">
@@ -22,8 +22,10 @@
 </template>
 
 <script>
+  import Navbar from '@/components/Navbar.vue'
 
 export default {
+  components: {Navbar},
   name: 'Home',
 
 
