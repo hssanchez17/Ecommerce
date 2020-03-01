@@ -1,17 +1,19 @@
 <template>
 	<div class="hello">
 	<b-navbar toggleable="lg" type="dark" variant="primary">
-      <b-navbar-brand href="/home">Dela Cream</b-navbar-brand>
+      <b-navbar-brand href="/">Dela Cream</b-navbar-brand>
       
       <div>
       	
       </div>
         <b-navbar-nav class="ml-auto">
           <b-nav-form>
-            <b-navbar-brand href="/user/list">Search a profile</b-navbar-brand>
-            <b-navbar-brand href="/user/profile">Profile</b-navbar-brand>
-            <b-navbar-brand href="/post/add">Create a post</b-navbar-brand>
-            <b-navbar-brand @click="logOut">Log out</b-navbar-brand>
+              <b-navbar-brand href="/cart">My cart</b-navbar-brand> 
+              <b-navbar-brand> Orders</b-navbar-brand>
+              <b-navbar-brand> Profile</b-navbar-brand>
+              <b-navbar-brand href="/login" v-if="!userLogedPermission">Log In</b-navbar-brand>
+              <b-navbar-brand @click="logOut()" v-else>Log Out</b-navbar-brand>
+
           </b-nav-form>
         </b-navbar-nav>
     </b-navbar>
@@ -24,20 +26,39 @@
 export default {
   data(){
     return{
-      user:''
+      userLogedPermission:''
 
     }
   },
+
+  created(){
+      this.userLogedPermissionFunction();
+    },
+
+    
   methods:{
+    logIng(){
+        this.$router.push({ path: `/login` })
+    },
+
+
+
     logOut(){
        this.axios.post('logout')
        .then(res => {
+          alert('Your session was closed')
           this.$cookie.delete('token', {domain: 'localhost'});
-          this.$router.push({ path: `/` })
+          this.$router.push({ path: `/` }).catch(err => {})
+          this.userLogedPermission=false
         })
         .catch( e => {
           console.log(e.response.data.error)
         })
+    },
+
+    userLogedPermissionFunction(){
+      if(this.$cookie.get('token')==null)this.userLogedPermission=false
+      else this.userLogedPermission=true
     }
   }
 }

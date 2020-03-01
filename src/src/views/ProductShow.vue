@@ -1,5 +1,6 @@
 <template>
 <div>
+  <Navbar></Navbar>
 	<div class="container">
   		<div class="row">
 
@@ -117,10 +118,9 @@
 
 <script>
   import {required,maxLength,integer,minValue} from 'vuelidate/lib/validators'
-
-export default {
-  name: 'Home',
-
+  import Navbar from '@/components/Navbar.vue'
+export default{
+    components: {Navbar},
 
   data() {
     return {

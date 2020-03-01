@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <Navbar></Navbar>
   	<div class="container">
     	<div class="row justify-content-center">
         	<div class="col-md-12">
@@ -71,8 +72,9 @@
 
 <script>
 
-export default {
-  name: 'Home',
+  import Navbar from '@/components/Navbar.vue'
+export default{
+    components: {Navbar},
 
 
   data() {

@@ -1,5 +1,6 @@
 <template>
 <div>
+   <Navbar></Navbar>
 	<div class="container">
     <div class="row row justify-content-md-center">
       <div class="col-md-8">
@@ -32,7 +33,7 @@
             
             </div>
 
-            <button class="btn btn-success" @click="login()">Upload Post</button>
+            <button class="btn btn-success" @click="login()">Login</button>
 
 
 
@@ -48,7 +49,9 @@
 
 
 <script>
+  import Navbar from '@/components/Navbar.vue'
 export default{
+    components: {Navbar},
 		data(){
 			return {
 				userLogin:{
@@ -64,6 +67,7 @@ export default{
                 
                 this.$cookie.set('token',true, 1);
           			this.$router.push({ path: `/` })
+                
         		})
         		.catch( e => {
                 alert('Password and email do not match')
