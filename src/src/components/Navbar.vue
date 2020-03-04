@@ -9,8 +9,10 @@
         <b-navbar-nav class="ml-auto">
           <b-nav-form>
               <b-navbar-brand href="/cart">My cart</b-navbar-brand> 
-              <b-navbar-brand> Orders</b-navbar-brand>
+              <b-navbar-brand href="/orders"> Orders</b-navbar-brand>
+              <b-navbar-brand href="/product/create"> Product</b-navbar-brand>
               <b-navbar-brand> Profile</b-navbar-brand>
+              <b-navbar-brand href="/register" >Register</b-navbar-brand>
               <b-navbar-brand href="/login" v-if="!userLogedPermission">Log In</b-navbar-brand>
               <b-navbar-brand @click="logOut()" v-else>Log Out</b-navbar-brand>
 

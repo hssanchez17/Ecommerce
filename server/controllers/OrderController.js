@@ -36,7 +36,7 @@ class OrderController{
 		const p2=product.updateStock(productId,quantity)
 		const p3=cart.removeAProductFromTheCart(productId,req.user.id)
 
-		Promise.all([p1, p2,p3])
+		Promise.all([p2, p1,p3])
 		.then(function(){res.status(200).json('successful order registration')})
 		.catch(e => console.error(e.stack))
 	}

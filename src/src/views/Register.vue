@@ -1,4 +1,6 @@
 <template>
+  <div>
+  <Navbar></Navbar>
   <div class="container">
     <div class="row row justify-content-md-center">
       <div class="col-md-8">
@@ -136,14 +138,17 @@
     </div>
   </div>
 
-
+</div>
 
 </template>
 
 
 <script>
   import { required, minLength, between, email,sameAs,integer} from 'vuelidate/lib/validators'
-  export default{
+    import Navbar from '@/components/Navbar.vue'
+export default{
+    components: {Navbar},
+
     data(){
       return {
         userRegister:{
