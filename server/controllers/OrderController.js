@@ -41,6 +41,15 @@ class OrderController{
 		.catch(e => console.error(e.stack))
 	}
 
+
+	getAllOrders(req,res){
+		const order= new Order()
+
+		order.getAll(req.user.id)
+		.then(function(orders){res.send({orders:orders})})
+		.catch(e => console.error(e.stack))
+	}
+
 }
 
 

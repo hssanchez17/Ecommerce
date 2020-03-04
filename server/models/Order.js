@@ -32,6 +32,21 @@ class Order{
 		})
 
 	}
+
+	getAll(userId){
+		return new Promise((resolve, reject) => {
+			const query='SELECT * FROM orders WHERE userId=$1'
+			const values=[userId]
+			
+			database.query(query,values)
+			.then(function(response){
+				const orders=response.rows
+				resolve(orders)
+			})
+			.catch(e => console.error(e.stack))
+
+		})
+	}
 }
 
 module.exports={Order}
