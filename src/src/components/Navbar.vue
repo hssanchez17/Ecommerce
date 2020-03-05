@@ -2,23 +2,30 @@
 	<div class="hello">
 	<b-navbar toggleable="lg" type="dark" variant="primary">
       <b-navbar-brand href="/">Dela Cream</b-navbar-brand>
+      <b-navbar-nav class="ml-auto">
+          <b-nav-form>
       
       <div>
       	
       </div>
-        <b-navbar-nav class="ml-auto">
-          <b-nav-form>
-              <b-navbar-brand href="/cart">My cart</b-navbar-brand> 
-              <b-navbar-brand href="/orders"> Orders</b-navbar-brand>
-              <b-navbar-brand href="/product/create"> Product</b-navbar-brand>
-              <b-navbar-brand> Profile</b-navbar-brand>
-              <b-navbar-brand href="/register" >Register</b-navbar-brand>
+
+
+
+
+              <b-navbar-brand href="/cart" v-if="userLogedPermission">My cart</b-navbar-brand> 
+              <b-navbar-brand href="/orders" v-if="userLogedPermission"> Orders</b-navbar-brand>
+              <b-navbar-brand href="/product/create" v-if="userLogedPermission"> Product</b-navbar-brand>
+              <b-navbar-brand v-if="userLogedPermission"> Profile</b-navbar-brand>
+              <b-navbar-brand href="/register" v-if="!userLogedPermission">Register</b-navbar-brand>
               <b-navbar-brand href="/login" v-if="!userLogedPermission">Log In</b-navbar-brand>
               <b-navbar-brand @click="logOut()" v-else>Log Out</b-navbar-brand>
 
           </b-nav-form>
         </b-navbar-nav>
-    </b-navbar>
+
+
+
+  </b-navbar>
    	</div>
 
 </template>
@@ -59,8 +66,9 @@ export default {
     },
 
     userLogedPermissionFunction(){
-      if(this.$cookie.get('token')==null)this.userLogedPermission=true
-      if(this.$cookie.get('token'))this.userLogedPermission=true
+      console.log(this.$cookie.get('token'))
+      if(this.$cookie.get('token')==null)this.userLogedPermission=false
+      if(this.$cookie.get('token')!=null)this.userLogedPermission=true
     }
   }
 }
