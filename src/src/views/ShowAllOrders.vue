@@ -6,6 +6,38 @@
         	<div class="col-md-12">
             	<div class="card">
                 	<h1 class="card-header">Orders</h1>
+                	<div class="card-body">
+                		<div class="table-responsive">
+                			<table class='table table-striped'>
+                				<thead>
+
+                				<tr>
+                                    <th scope="col">Product</th>
+                                    <th scope="col">Quantity</th>
+                                </tr>
+                            </thead>
+
+                            <tr v-for="(product,index) in listOfOrders" :key="index"> 
+                            		<td>
+                            			<img :src="product.imageurl"  id="productPicture">
+                            		</td>
+                            		<td>{{product.quantity}}</td>
+                            	</tr>
+
+
+                			</table>
+
+
+
+                		</div>
+
+
+
+                	</div>
+
+
+
+
                 </div>
             </div>
         </div>    
@@ -25,7 +57,11 @@ export default{
     components: {Navbar},
     data() {
     	return {   
-    		orders:{
+    		listOfOrders:{
+    			title:'',
+    		description:'',
+    		quantity:'',
+    		price:''
 
     		}
     	};
@@ -39,6 +75,7 @@ export default{
   	getOrders(){
 	  		this.axios.get(`/order/getAll`)
 	  		.then((response) => {
+	  			this.listOfOrders=response.data.orders
 	          console.log(response.data.orders)
 	        })
 	        .catch((e)=>{
@@ -48,3 +85,13 @@ export default{
 	}
 }
 </script>
+
+<style>
+
+
+#productPicture{
+    width: 90px; 
+    height: 90px;
+}
+</style>
+

@@ -28,7 +28,7 @@
 export default {
   data(){
     return{
-      userLogedPermission:''
+      userLogedPermission:false
 
     }
   },
@@ -59,8 +59,8 @@ export default {
     },
 
     userLogedPermissionFunction(){
-      if(this.$cookie.get('token')==null)this.userLogedPermission=false
-      else this.userLogedPermission=true
+      if(this.$cookie.get('token')==null)this.userLogedPermission=true
+      if(this.$cookie.get('token'))this.userLogedPermission=true
     }
   }
 }

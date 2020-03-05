@@ -35,7 +35,7 @@ class Order{
 
 	getAll(userId){
 		return new Promise((resolve, reject) => {
-			const query='SELECT * FROM orders WHERE userId=$1'
+			const query='SELECT * FROM orders JOIN products ON orders.productId=products.id and orders.userId=$1;'
 			const values=[userId]
 			
 			database.query(query,values)
