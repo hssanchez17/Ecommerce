@@ -3,11 +3,12 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
+
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import( '../views/Home.vue'),
+    component: () => import( '../views/Home.vue')
   },
 
   //AUTH
@@ -33,6 +34,7 @@ const routes = [
     path: '/product/create',
     name: 'productCreate',
     component: () => import( '../views/ProductCreate.vue'),
+    beforeEnter: ensureAuthenticated
   },
 
   {
@@ -46,7 +48,8 @@ const routes = [
   {
     path:'/cart',
     name:'cartShow',
-    component:()=>import('../views/CartShow.vue')
+    component:()=>import('../views/CartShow.vue'),
+    beforeEnter: ensureAuthenticated
   },
 
 
@@ -55,7 +58,8 @@ const routes = [
   {
     path:'/orders',
     name:'showAllOrders',
-     component:()=>import('../views/ShowAllOrders.vue')
+     component:()=>import('../views/ShowAllOrders.vue'),
+     beforeEnter: ensureAuthenticated
 
   },
 
@@ -64,7 +68,8 @@ const routes = [
   {
     path:'/profile',
     name:'showProfile',
-    component:()=>import('../views/ProfileShow.vue')
+    component:()=>import('../views/ProfileShow.vue'),
+    beforeEnter: ensureAuthenticated
 
   }
   
@@ -75,5 +80,23 @@ const router = new VueRouter({
     base: process.env.BASE_URL,
     routes
   })
+
+
+function ensureAuthenticated (to, from, next) {
+  if(Vue.cookie.get('token'))next()
+  else{
+    alert('Login first')
+    next('/')
+  }
+}
+
+function forwardAuthenticated (to, from, next) {
+  if(Vue.cookie.get('token')) next('/home')
+  else next()
+}
+
+
+
+
 
 export default router

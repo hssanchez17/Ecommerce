@@ -27,6 +27,7 @@
 				    		<div class="form-group" id="AddressInput">
 				      			<input class="form-control" type="text" v-model="user.addres" disabled>
 				    		</div>
+
           				</div>
 
 

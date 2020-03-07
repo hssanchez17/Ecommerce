@@ -28,7 +28,7 @@
                 <button class="btn btn-outline-dark" @click="addToCart()" v-if="permissionToAddToCart">Add to cart</button>
               </div>
 
-                 <button class="btn btn-success" @click="clickToUpdate()">Update</button>
+              <button class="btn btn-success" @click="clickToUpdate()">Update</button>
              
             </div>            
           </div>
@@ -99,19 +99,13 @@
                  <button class="btn btn-success" @click="updateProduct()">Update</button>
                  <button class="btn btn-danger" @click="cancelTheUpdate()">Cancel</button>
               </div> 
-
-        </div>
-
           </div>
-
-          <input id="QuantityInput" v-if="permissionToAddProductToCart"    class="form-control" type="text" placeholder="Enter the quantity" v-model="productToCart.quantity">
         </div>
 
-
-
-
-  		</div>
-  	</div>	
+        <input id="QuantityInput" v-if="permissionToAddProductToCart"    class="form-control" type="text" placeholder="Enter the quantity" v-model="productToCart.quantity">
+      </div>
+    </div>
+  </div>	
 </div>
 
 </template>
@@ -196,25 +190,29 @@ export default{
       },
 
       getPermissionToAddToCart(){
-        this.axios.get(`cart/permission-to-add-to-cart/${this.id}`)
-        .then((response) => {
-         this.permissionToAddToCart=response.data.permission
-        })
-        .catch((e)=>{
-          console.log('error' + e);
-        })
-        
-
+        if(this.$cookie.get('token')){
+          this.axios.get(`cart/permission-to-add-to-cart/${this.id}`)
+          .then((response) => {
+            this.permissionToAddToCart=response.data.permission
+          })
+          .catch((e)=>{
+            console.log('error' + e);
+          })
+        }
       },
 
       addToCart(){
-        this.axios.post(`cart/register-product/${this.id}`)
-        .then((response) => {
-          this.permissionToAddToCart=false
-        })
-        .catch((e)=>{
-          console.log('error' + e);
-        })
+        if(this.$cookie.get('token')){
+          this.axios.post(`cart/register-product/${this.id}`)
+          .then((response) => {
+            this.permissionToAddToCart=false
+          })
+          .catch((e)=>{
+            console.log('error' + e);
+          })
+        }
+
+        else alert('please login first')
       },
 
       cancelTheUpdate(){ 
@@ -228,7 +226,6 @@ export default{
         this.productToUpdate.price=this.product.price
         this.productToUpdate.stock=this.product.stock
         this.permissionToUpdate=true
-        console.log(this.productToUpdate)
       },
 
       updateProduct(){
