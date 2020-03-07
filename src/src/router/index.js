@@ -57,6 +57,15 @@ const routes = [
     name:'showAllOrders',
      component:()=>import('../views/ShowAllOrders.vue')
 
+  },
+
+
+  //PROFILE
+  {
+    path:'/profile',
+    name:'showProfile',
+    component:()=>import('../views/ProfileShow.vue')
+
   }
   
 ]

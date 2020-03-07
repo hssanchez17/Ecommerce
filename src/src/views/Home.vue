@@ -3,8 +3,7 @@
     <Navbar></Navbar>
     <div class="container">
       <div class="padre">
-        <p>The best place to eat the best ice cream</p>
-        
+        <h1>The best place to eat the best ice cream</h1>  
       </div>
   </div>
 
@@ -15,9 +14,13 @@
           <div class="col-md-4"  v-for="product in listOfProducts">
               
             <div class="card">
-              <a :href="'/product/show/'+ product.id">
-                <img :src="product.imageurl"  id="profilePicture">
-              </a>
+
+              <div class="inner">
+                <a :href="'/product/show/'+ product.id">
+                  <img :src="product.imageurl"  id="profilePicture">
+                </a>
+              </div>
+
                 <div class="card-body">
                   <h5 class="card-title"> {{product.title}}</h5>
                   <strong> {{product.price}} Bs</strong>
@@ -71,9 +74,25 @@ body{
   padding: 0;
   font-family: sans-serif;  
 }
-#profilePicture{
+
+.inner{
   width: 100%; 
   height: 300px;
+  overflow: hidden;
+}
+
+.inner #profilePicture{
+  transition: all 1.5s ease;
+}
+
+#profilePicture{
+  width: 100%;
+  height: 100%;
+}
+
+
+#profilePicture:hover{
+  transform: scale(1.5);
 }
 
 .padre{
@@ -86,17 +105,21 @@ body{
   background-image: url('https://previews.123rf.com/images/andreadonetti/andreadonetti1603/andreadonetti160300055/54336392-display-of-assorted-ice-creams-in-metal-tubs-in-a-shop-or-ice-cream-parlour.jpg');
 }
 
-.padre p{
+.padre h1{
   background-size: 100% 100%;
   background-color: rgba(0,0,0,0.5);
   display: table-cell;
-  font-size: 1.4rem;
   margin: 0;
   padding: 0 1rem;
   vertical-align: middle;
   color:white;
+  opacity: 0;
+  transition: 1s;
 }
 
+.padre h1:hover{
+  opacity: 1;
+}
 
 
 </style>
