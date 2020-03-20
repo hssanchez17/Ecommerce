@@ -71,6 +71,14 @@ const routes = [
     component:()=>import('../views/ProfileShow.vue'),
     beforeEnter: ensureAuthenticated
 
+  },
+
+  //TYPE OF PRODUCT
+  {
+    path:'/type-of-product/create',
+    name:'createTypeOfProdyct',
+    component:()=>import('../views/TypeOfProductCreate.vue'),
+    beforeEnter: ensureAuthenticated
   }
   
 ]
