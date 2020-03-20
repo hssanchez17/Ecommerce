@@ -124,6 +124,18 @@
                 <span class="invalid-feedback" v-if="!$v.userRegister.phone.integer">
                   This field should be integer.
                 </span>
+
+                <div v-if="permissionToUpdate">
+                      <textarea
+                        class="form-control"
+                        placeholder="Descripcion de su comentario" 
+                        v-model.trim="$v.commentEdited.comment.$model" 
+                        :class="{'is-invalid':$v.commentEdited.comment.$error,'is-valid':!$v.commentEdited.comment.$invalid}"
+                      ></textarea> 
+
+                       <span class="invalid-feedback" v-if="$v.commentEdited.comment">Este campo no puede ser vacio</span> 
+                    </div>
+                    
             </div>
 
             <button class="btn btn-success" @click="register()">Upload Post</button>

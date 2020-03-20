@@ -74,12 +74,26 @@ const routes = [
   },
 
   //TYPE OF PRODUCT
+
+  {
+    path:'/type-of-product',
+    name:'TypeOfProdyct',
+    component:()=>import('../views/TypeOfProductShowAll.vue'),
+    beforeEnter: ensureAuthenticated
+  },
+
   {
     path:'/type-of-product/create',
     name:'createTypeOfProdyct',
     component:()=>import('../views/TypeOfProductCreate.vue'),
     beforeEnter: ensureAuthenticated
-  }
+  },
+
+  {
+    path:'/type-of-product/show/:id',
+    name:'type-of-productShow',
+    component:()=>import('../views/TypeOfProductShow.vue')
+  },
   
 ]
 

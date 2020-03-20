@@ -15,6 +15,37 @@ class TypeOfProductController{
 
 	}
 
+	getAll(req,res){
+		const typeOfProduct =new TypeOfProduct();
+		typeOfProduct.getAll()
+		.then(function(typeOfProducts){ res.status(200).json({typeOfProducts:typeOfProducts})})
+		.catch(e => console.error(e.stack))
+	}
+
+	get(req,res){
+		const id=req.params.id
+		const typeOfProduct =new TypeOfProduct();
+		typeOfProduct.get(id)
+		.then(function(typeOfProduct){ 
+			if(typeOfProduct==null) res.status(200).json("Error:that product doesn't exsist")
+	    	else  res.send(typeOfProduct)
+		})
+		.catch(e => console.error(e.stack))
+
+	}
+
+	update(req,res){
+		const {title,description}=req.body
+		const id=req.params.id
+		const typeOfProduct =new TypeOfProduct();
+		
+		typeOfProduct.update(id,title,description)
+		.then(function(typeOfProduct){res.status(200).json('successful typeOfProduct update')})
+		.catch(e => console.error(e.stack))
+
+	}
+
+
 }
 
 module.exports={TypeOfProductController}
