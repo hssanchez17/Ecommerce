@@ -6,7 +6,10 @@
             <div class="col-md-12">
                 <div class="card">
 
-                    <h1 class="card-header">Products</h1>
+                    <div class="card-header">
+                      <h1>List Of Products</h1>
+                      <a class="btn btn-success" :href="`/product/create`" v-if="$cookie.get('token') && JSON.parse($cookie.get('user')).rol=='admin'">Create A Product</a>
+                 </div> 
 
                     <div class="card-body">
                     <div class="table-responsive">

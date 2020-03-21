@@ -34,7 +34,8 @@ const routes = [
     path: '/product/create',
     name: 'productCreate',
     component: () => import( '../views/Product/ProductCreate.vue'),
-    beforeEnter: ensureAuthenticated
+    beforeEnter: ensureAuthenticated,
+    beforeEnter: adminAuthenticated
   },
 
   {
@@ -84,15 +85,15 @@ const routes = [
   {
     path:'/type-of-product',
     name:'TypeOfProdyct',
-    component:()=>import('../views/TypeOfProduct/TypeOfProductShowAll.vue'),
-    beforeEnter: ensureAuthenticated
+    component:()=>import('../views/TypeOfProduct/TypeOfProductShowAll.vue')
   },
 
   {
     path:'/type-of-product/create',
     name:'createTypeOfProdyct',
     component:()=>import('../views/TypeOfProduct/TypeOfProductCreate.vue'),
-    beforeEnter: ensureAuthenticated
+    beforeEnter: ensureAuthenticated,
+    beforeEnter: adminAuthenticated
   },
 
   {
@@ -121,6 +122,14 @@ function ensureAuthenticated (to, from, next) {
 function forwardAuthenticated (to, from, next) {
   if(Vue.cookie.get('token')) next('/home')
   else next()
+}
+
+function adminAuthenticated(ro,from,next){
+  if(JSON.parse(Vue.cookie.get('user')).rol=='admin')next()
+  else{
+    alert("You don't have enough permissions  to access")
+      next('/')
+  }
 }
 
 

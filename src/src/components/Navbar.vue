@@ -8,12 +8,19 @@
       <div>
       	
       </div>
-      <b-navbar-brand href="/products">Products</b-navbar-brand>
-              <b-navbar-brand href="/type-of-product" v-if="userLogedPermission">Type Of Product</b-navbar-brand>
+              <b-navbar-brand href="/products">List of Products</b-navbar-brand>
+              <b-navbar-brand href="/type-of-product">List of Type Of Product</b-navbar-brand>
+
               <b-navbar-brand href="/cart" v-if="userLogedPermission">My cart</b-navbar-brand> 
-              <b-navbar-brand href="/orders" v-if="userLogedPermission"> Orders</b-navbar-brand>
-              <b-navbar-brand href="/product/create" v-if="userLogedPermission"> Product</b-navbar-brand>
+              <b-navbar-brand href="/orders" v-if="userLogedPermission">My Orders</b-navbar-brand>
               <b-navbar-brand href="/profile" v-if="userLogedPermission"> Profile</b-navbar-brand>
+
+
+             
+              
+
+
+
               <b-navbar-brand href="/register" v-if="!userLogedPermission">Register</b-navbar-brand>
               <b-navbar-brand href="/login" v-if="!userLogedPermission">Log In</b-navbar-brand>
               <b-navbar-brand @click="logOut()" v-else>Log Out</b-navbar-brand>
@@ -68,7 +75,7 @@ export default {
     userLogedPermissionFunction(){
       if(this.$cookie.get('token')==null)this.userLogedPermission=false
       if(this.$cookie.get('token')!=null){
-        console.log(this.$cookie.get('test'))
+        console.log(JSON.parse(this.$cookie.get('user')))
         this.userLogedPermission=true
       }
     }

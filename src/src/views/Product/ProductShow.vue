@@ -28,7 +28,7 @@
                 <button class="btn btn-outline-dark" @click="addToCart()" v-if="permissionToAddToCart">Add to cart</button>
               </div>
 
-              <button class="btn btn-success" @click="clickToUpdate()" v-if="$cookie.get('token')">Update</button>
+              <button class="btn btn-success" @click="clickToUpdate()" v-if="$cookie.get('token') && JSON.parse($cookie.get('user')).rol=='admin'">Update</button>
              
             </div>            
           </div>

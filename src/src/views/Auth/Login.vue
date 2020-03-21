@@ -64,10 +64,9 @@ export default{
 			login(){
         		this.axios.post('login', this.userLogin)
         		.then(res => {
-                
                 this.$cookie.set('token',true, 1);
-          			this.$router.push({ path: `/` })
-                
+                this.$cookie.set('user',JSON.stringify(res.data.user),1)
+                this.$router.push({ path: `/` })
         		})
         		.catch( e => {
                 alert('Password and email do not match')
