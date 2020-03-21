@@ -24,7 +24,7 @@
                            		<td>{{typeOfProduct.description}}</td>
                            		<td>
                                    
-                                <a class="btn btn-warning":href="`/`">Update</a>
+                                <a class="btn btn-warning" :href="`/type-of-product/show/`+ typeOfProduct.id">Update</a>
                                 </td>
                             </tr>
 

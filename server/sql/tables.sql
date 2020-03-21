@@ -5,7 +5,8 @@ CREATE TABLE Users(
    email VARCHAR NOT NULL,
    phone VARCHAR NOT NULL,
    password VARCHAR NOT NULL,
-   address VARCHAR NOT NULL
+   address VARCHAR NOT NULL,
+   rol VARCHAR NOT NULL
 );
 
 CREATE TABLE Products(

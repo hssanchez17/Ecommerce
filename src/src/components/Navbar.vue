@@ -8,7 +8,8 @@
       <div>
       	
       </div>
-      <b-navbar-brand href="/type-of-product/create" v-if="userLogedPermission">Type Of Product</b-navbar-brand>
+      <b-navbar-brand href="/products">Products</b-navbar-brand>
+              <b-navbar-brand href="/type-of-product" v-if="userLogedPermission">Type Of Product</b-navbar-brand>
               <b-navbar-brand href="/cart" v-if="userLogedPermission">My cart</b-navbar-brand> 
               <b-navbar-brand href="/orders" v-if="userLogedPermission"> Orders</b-navbar-brand>
               <b-navbar-brand href="/product/create" v-if="userLogedPermission"> Product</b-navbar-brand>

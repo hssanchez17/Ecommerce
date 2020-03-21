@@ -13,31 +13,25 @@
           <div class="card-body text-center">
 
             <div class="form-group" id="TitleInput">
-				      <input 
-				          
-              class="form-control"
-				            type="text" 
-				            placeholder="Title for the product" 
-				            v-model="$v.product.title.$model"  
-				            :class="{'is-invalid':$v.product.title.$error,'is-valid':!$v.product.title.$invalid}">
+				      <input   
+                class="form-control"
+				        type="text" 
+				        placeholder="Title for the product" 
+				        v-model="$v.product.title.$model"  
+				        :class="{'is-invalid':$v.product.title.$error,'is-valid':!$v.product.title.$invalid}">
 
-				              <span class="invalid-feedback" v-if="!$v.product.title.required">
-				              	This field cannot be empty.
-				              </span>
+				      <span class="invalid-feedback" v-if="!$v.product.title.required">This field cannot be empty.</span>
 				    </div>
 
             <div class="form-group" id="DescriptionInput">
-			              <textarea
-			              class="form-control"
-			              type="text" 
-			              placeholder="Enter the Description"
-			              v-model="$v.product.description.$model"  
-				            :class="{'is-invalid':$v.product.description.$error,'is-valid':!$v.product.description.$invalid}">
-			              ></textarea>
+			        <textarea
+			           class="form-control"
+			           type="text" 
+			           placeholder="Enter the Description"
+			           v-model="$v.product.description.$model"  
+				        :class="{'is-invalid':$v.product.description.$error,'is-valid':!$v.product.description.$invalid}"></textarea>
 
-			              <span class="invalid-feedback" v-if="!$v.product.description.required">
-				              This field cannot be empty.
-				        	  </span>
+			       <span class="invalid-feedback" v-if="!$v.product.description.required">This field cannot be empty.</span>
 				    </div>
 
             			<div class="form-group" id="PriceInput">

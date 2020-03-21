@@ -17,13 +17,13 @@ const routes = [
   {
     path:'/register',
     name:'Register',
-    component:()=> import('../views/Register.vue')
+    component:()=> import('../views/Auth/Register.vue')
   },
 
   {
     path:'/login',
     name:'Login',
-    component:()=>import('../views/Login.vue')
+    component:()=>import('../views/Auth/Login.vue')
   },
 
 
@@ -33,14 +33,20 @@ const routes = [
   {
     path: '/product/create',
     name: 'productCreate',
-    component: () => import( '../views/ProductCreate.vue'),
+    component: () => import( '../views/Product/ProductCreate.vue'),
     beforeEnter: ensureAuthenticated
   },
 
   {
     path:'/product/show/:id',
     name:'productShow',
-    component:()=>import('../views/ProductShow.vue')
+    component:()=>import('../views/Product/ProductShow.vue')
+  },
+
+  {
+    path:'/products',
+    name:'productShowAll',
+    component:()=>import('../views/Product/ProductShowAll.vue')
   },
 
   //CART
@@ -78,21 +84,21 @@ const routes = [
   {
     path:'/type-of-product',
     name:'TypeOfProdyct',
-    component:()=>import('../views/TypeOfProductShowAll.vue'),
+    component:()=>import('../views/TypeOfProduct/TypeOfProductShowAll.vue'),
     beforeEnter: ensureAuthenticated
   },
 
   {
     path:'/type-of-product/create',
     name:'createTypeOfProdyct',
-    component:()=>import('../views/TypeOfProductCreate.vue'),
+    component:()=>import('../views/TypeOfProduct/TypeOfProductCreate.vue'),
     beforeEnter: ensureAuthenticated
   },
 
   {
     path:'/type-of-product/show/:id',
     name:'type-of-productShow',
-    component:()=>import('../views/TypeOfProductShow.vue')
+    component:()=>import('../views/TypeOfProduct/TypeOfProductShow.vue')
   },
   
 ]

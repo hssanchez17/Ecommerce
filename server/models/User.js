@@ -10,13 +10,14 @@ class User{
 		this.phone=phone;
 		this.password=password;
 		this.address=address;
+		this.rol="admin"
 	}
 
 	create(){
 
     	return new Promise((resolve, reject) => {
-        	const text = 'INSERT INTO users(name, email,phone,password,address,lastName) VALUES ($1, $2, $3, $4, $5,$6)'
-    		const values = [this.name, this.email,this.phone,this.password,this.address,this.lastName]
+        	const text = 'INSERT INTO users(name, email,phone,password,address,lastName,rol) VALUES ($1, $2, $3, $4, $5,$6,$7)'
+    		const values = [this.name, this.email,this.phone,this.password,this.address,this.lastName,this.rol]
 
          	database.query(text, values)
            .then(function(){resolve(true)})
