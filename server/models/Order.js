@@ -2,16 +2,12 @@
 const {database}=require('../config/database')
 
 class Order{
-	constructor(userId,productId,quantity){
-		this.userId=userId;
-		this.productId=productId;
-		this.quantity=quantity
-	}
 
-	create(){
+
+	create(userId,productId,quantity){
 		return new Promise((resolve, reject) => {
 			const query = 'INSERT INTO orders(userId,productId,quantity) VALUES ($1, $2, $3)'
-	    	const values = [this.userId,this.productId,this.quantity]
+	    	const values = [userId,productId,quantity]
 
 	    	database.query(query, values)
 			.then(function(){resolve(true)})
@@ -21,7 +17,6 @@ class Order{
 	}
 
 	removeAllProductsFromAllOrdersForDestructionOfAProduct(productId){
-
 		return new Promise((resolve, reject) => {
 			const query= 'DELETE FROM orders WHERE productId=$1'
 			const values=[productId]

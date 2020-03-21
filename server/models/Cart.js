@@ -3,16 +3,11 @@ const {database}=require('../config/database')
 
 
 class Cart{
-	constructor(userId,productId,quantity){
-		this.userId=userId;
-		this.productId=productId;
-		this.quantity=1
-	}
 
-	registerAProduct(){
+	registerAProduct(userId,productId,quantity){
 		return new Promise((resolve, reject) => {
 			const query = 'INSERT INTO carts(userId,productId,quantity) VALUES ($1, $2, $3)'
-	    	const values = [this.userId,this.productId,this.quantity]
+	    	const values = [userId,productId,quantity]
 
 	    	database.query(query, values)
 			.then(function(){resolve(true)})
@@ -25,7 +20,8 @@ class Cart{
 		return new Promise((resolve, reject) => {
 			const text='SELECT Products.id,title,description,price,stock,imageUrl,public_id,quantity FROM carts JOIN products ON carts.productId=products.id and carts.userId=$1;'
 			const values = [id]	
-			 database.query(text, values)
+
+			database.query(text, values)
 			.then(function(response){
 				const cart=response.rows
 				resolve(cart)
@@ -42,7 +38,6 @@ class Cart{
 			.then(function(response){
 				if(response.rows[0]==null)resolve(true)
 				else resolve(false)
-		
 			})
 
 		})

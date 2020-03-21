@@ -14,8 +14,8 @@ class ProductController{
 		    const public_id= result.public_id
 
 
-		    const product= new Product(title,description,price,stock,imageUrl,public_id)
-			product.create()
+		    const product= new Product()
+			product.create(title,description,price,stock,imageUrl,public_id)
 			.then(function(){res.status(200).json('successful product registration')})
 			.catch(e => console.error(e.stack))
 		})

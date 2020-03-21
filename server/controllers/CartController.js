@@ -5,9 +5,9 @@ class CartController{
 
 	registerAProduct(req,res){
 		const productId=req.params.id
-		const cart= new Cart(req.user.id,productId,1)
+		const cart= new Cart()
 
-		cart.registerAProduct()
+		cart.registerAProduct(req.user.id,productId,1)
 		.then(function(){res.status(200).json('successful cart product registration')})
 		.catch(e => console.error(e.stack))
 	}

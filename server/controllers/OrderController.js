@@ -10,11 +10,11 @@ class OrderController{
 		const {quantity}=req.body
 
 		
-		const order= new Order(req.user.id,productId,quantity)
+		const order= new Order()
 		const product= new Product
 
 
-		const p1=order.create()
+		const p1=order.create(req.user.id,productId,quantity)
 		const p2=product.updateStock(productId,quantity)
 
 		Promise.all([p1, p2])

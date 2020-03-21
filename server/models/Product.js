@@ -2,19 +2,12 @@
 const {database}=require('../config/database')
 
 class Product{
-	constructor(title,description,price,stock,imageUrl,public_id){
-		this.title=title;
-		this.description=description;
-		this.price=price
-		this.stock=stock
-		this.imageUrl=imageUrl
-		this.public_id=public_id
-	}
 
-	create(){
+
+	create(title,description,price,stock,imageUrl,public_id){
 		return new Promise((resolve, reject) => {
 			const query = 'INSERT INTO products(title,description,price,stock,imageUrl,public_id) VALUES ($1, $2, $3, $4, $5, $6)'
-	    	const values = [this.title,this.description,this.price,this.stock,this.imageUrl,this.public_id]
+	    	const values = [title,description,price,stock,imageUrl,public_id]
 
 	    	database.query(query, values)
 			.then(function(){resolve(true)})
