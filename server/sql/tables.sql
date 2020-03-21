@@ -20,6 +20,14 @@ CREATE TABLE Products(
    public_id VARCHAR NOT NULL
 );
 
+CREATE TABLE Products_TypeOfProducts(
+   id SERIAL PRIMARY KEY,
+   typeOfProductId INTEGER,
+   productId INTEGER,
+   FOREIGN KEY (productId) REFERENCES Products(id),
+   FOREIGN KEY (typeOfProductId) REFERENCES TypeOfProduct(id)
+);
+
 
 CREATE TABLE TypeOfProduct(
    id SERIAL PRIMARY KEY,
