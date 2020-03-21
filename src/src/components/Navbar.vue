@@ -50,6 +50,8 @@ export default {
 
 
 
+
+
     logOut(){
        this.axios.post('logout')
        .then(res => {
@@ -65,7 +67,10 @@ export default {
 
     userLogedPermissionFunction(){
       if(this.$cookie.get('token')==null)this.userLogedPermission=false
-      if(this.$cookie.get('token')!=null)this.userLogedPermission=true
+      if(this.$cookie.get('token')!=null){
+        console.log(this.$cookie.get('test'))
+        this.userLogedPermission=true
+      }
     }
   }
 }

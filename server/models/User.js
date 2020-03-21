@@ -10,7 +10,7 @@ class User{
 		this.phone=phone;
 		this.password=password;
 		this.address=address;
-		this.rol="admin"
+		this.rol="user"
 	}
 
 	create(){
