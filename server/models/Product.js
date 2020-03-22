@@ -6,11 +6,14 @@ class Product{
 
 	create(title,description,price,stock,imageUrl,public_id){
 		return new Promise((resolve, reject) => {
-			const query = 'INSERT INTO products(title,description,price,stock,imageUrl,public_id) VALUES ($1, $2, $3, $4, $5, $6)'
+			const query = 'INSERT INTO products(title,description,price,stock,imageUrl,public_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id'
 	    	const values = [title,description,price,stock,imageUrl,public_id]
 
 	    	database.query(query, values)
-			.then(function(){resolve(true)})
+			.then(function(response){
+				const id=response.rows[0].id
+				resolve(id)
+			})
 			.catch(e => console.error(e.stack))
 			
 		})
@@ -78,6 +81,20 @@ class Product{
 			.then(function(){resolve(true)})
 			.catch(e => console.error(e.stack))
 		})
+	}
+	associateAProductWithItsType(productId,typeOfProductId){
+
+		return new Promise((resolve, reject) => {
+			const query = 'INSERT INTO products_typeOfProducts(productId,typeOfProductId) VALUES ($1, $2)'
+			const values=[productId,typeOfProductId]
+			
+			database.query(query, values)
+			.then(function(){resolve(true)})
+			.catch(e => console.error(e.stack))
+
+
+		})
+
 	}
 
 }

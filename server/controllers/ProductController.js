@@ -3,13 +3,13 @@ const cloudinary = require('../middlewares/cloudinary');
 const {Order}=require('../models/Order.js')
 const {Product}=require('../models/Product.js')
 const {Cart}=require('../models/Cart.js')
+const {TypeOfProduct}=require('../models/TypeOfProduct.js')
 
 class ProductController{
 
 	create(req,res){
 		cloudinary.uploadImage(req.file)
 		.then(function(result){
-			console.log(req.body)
 		    const {title,description,price,stock}=req.body
 		    const imageUrl=result.url
 		    const public_id= result.public_id
@@ -17,11 +17,26 @@ class ProductController{
 
 		    const product= new Product()
 			product.create(title,description,price,stock,imageUrl,public_id)
-			.then(function(){
-				console.log(product)
-				res.status(200).json('successful product registration')
+			.then(function(productId){
+				var {listOfTypeOfProducts}=req.body;
+				console.log(listOfTypeOfProducts[1])
+				console.log(listOfTypeOfProducts.length)
+				 res.status(200).json('successful product registration')
+
+				/*var promiseArray=[]
+				var {listOfTypeOfProducts}=req.body;
+				console.log(listOfTypeOfProducts.length)
+
+				listOfTypeOfProducts.map(function(typeOfProduct){       
+                 return promiseArray.push(product.associateAProductWithItsType(productId,typeOfProduct.id))
+        		});
+
+				Promise.all(promiseArray)
+        		.then(function(){ res.status(200).json('successful product registration')})
+        		.catch(err => res.status(400).json('Error: ' + err));*/
+
 			})
-			.catch(e => console.error(e.stack))
+			//.catch(e => console.error(e.stack))
 		})
 
 		.catch(err => res.status(400).json('Error: ' + err));
