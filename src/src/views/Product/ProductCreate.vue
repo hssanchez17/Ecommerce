@@ -68,21 +68,24 @@
 				        	</span>
             			</div>
 
-            			 <div class="form-group" id="ImageInput">
+            			<div class="form-group" id="ImageInput">
+                    <div class="input-group">
+                        <input 
+                        type="file"
+                        @change="onFileSelected" 
+                        class="custom-file-input"
+                        :class="{'is-invalid':$v.product.imageUrl.$error,'is-valid':!$v.product.imageUrl.$invalid}"
+                        >
 
-              <div class="input-group">
-                  <input 
-                  type="file"
-                  @change="onFileSelected" 
-                  class="custom-file-input"
-                  :class="{'is-invalid':$v.product.imageUrl.$error,'is-valid':!$v.product.imageUrl.$invalid}"
-                  >
 
+                        <label class="custom-file-label" for="inputGroupFile" >Choose file</label>
+                        <span class="invalid-feedback" v-if="!$v.product.imageUrl.required">This field cannot be empty.</span>
+                    </div>
+                  </div>
 
-                  <label class="custom-file-label" for="inputGroupFile" >Choose file</label>
-                  <span class="invalid-feedback" v-if="!$v.product.imageUrl.required">This field cannot be empty.</span>
-              </div>
-            </div>
+                  <div class="form-group" id="exampleInput">
+                    <input type="text" class="form-control" placeholder="example"> 
+                  </div>
 
 
             			 <button class="btn btn-success" @click="createProduct()">Upload Post</button>
@@ -149,6 +152,10 @@ export default{
           	})
 
          }    
+      },
+
+      addNewTypeOfProduct(){
+        var example=document.getElementById("exampleInput").value
       }
     }
 };
