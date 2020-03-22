@@ -1,4 +1,4 @@
-<template>
+s<template>
 <div>
   <Navbar></Navbar>
 	<div class="container">

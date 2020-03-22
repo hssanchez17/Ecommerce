@@ -83,8 +83,15 @@
                     </div>
                   </div>
 
-                  <div class="form-group" id="exampleInput">
-                    <input type="text" class="form-control" placeholder="example"> 
+                  <div>
+                    <div class="form-check form-check-inline">
+                      <div v-for="(typeOfProduct,index) in listOfTypeOfProducts" :key="index">
+                        <div id="prueba">
+                          <input type="checkbox" class="form-check-input" id="exampleCheck1" v-model="checkedNames" :value="typeOfProduct.id" >
+                          <label class="form-check-label">{{typeOfProduct.title}}</label>
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
 
@@ -92,6 +99,7 @@
           			</div>
 
           		</div>
+              <span>Checked names: {{ checkedNames }}</span>
 
 
 				</div>
@@ -116,8 +124,19 @@ export default{
      		price:'',
      		stock:'',
      		imageUrl:''
-     	}   
+     	},
+
+      listOfTypeOfProducts:{  
+          id:'',
+          title:'',
+          description:''
+      },
+      checkedNames: []
     };
+  },
+
+  mounted(){
+      this.getAllTypeOfProducts()
   },
 
   validations:{
@@ -129,7 +148,20 @@ export default{
   		imageUrl:{required}
   	}
   },
+
+
   methods:{
+    getAllTypeOfProducts(){
+      this.axios.get(`type-of-product/show/all`)
+        .then((response) => {
+              this.listOfTypeOfProducts= response.data.typeOfProducts;
+            console.log(this.listOfTypeOfProducts)
+          })
+          .catch((e)=>{
+              console.log('error' + e);
+          })
+    },
+
        onFileSelected(event){
         this.product.imageUrl=event.target.files[0]
       },
@@ -142,6 +174,7 @@ export default{
         	fd.append('price',this.product.price)
         	fd.append('stock',this.product.stock)
         	fd.append('imageUrl',this.product.imageUrl)
+          fd.append('listOfTypeOfProducts',this.checkedNames)
 
         	this.axios.post('product/create',fd)
           	.then(res => {
@@ -153,11 +186,14 @@ export default{
 
          }    
       },
-
-      addNewTypeOfProduct(){
-        var example=document.getElementById("exampleInput").value
-      }
     }
 };
 
 </script>
+
+<style>
+  
+  #prueba{
+    margin: 10px;
+  }
+</style>
