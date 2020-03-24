@@ -4,7 +4,7 @@
 
       <!--  Este es el navbar-->
   <b-navbar toggleable="lg" type="dark" variant="info">
-    <b-navbar-brand href="#">Dela Cream</b-navbar-brand>
+    <b-navbar-brand href="/">Dela Cream</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -31,6 +31,8 @@
   
     <Slider></Slider>
   <!--  Este es el navbar-->
+
+  <h1>Products</h1>
 
   <div class="row" id="listOfProducts">
     <div class="col-md-4"  v-for="article in displayedArticles">    
@@ -186,4 +188,13 @@ btn-group{
   display: flex;
   justify-content: center;
 }
+
+.card{
+  height: 400px;
+  margin-top: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  
+}
+
 </style>

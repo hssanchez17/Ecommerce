@@ -4,102 +4,102 @@ s<template>
 	<div class="container">
   		<div class="row">
 
-  			<div class="col-md-8" id="leftColumn">
+  			<div id="leftColumn">
   				<div class="card">
               <img :src="product.imageurl" class="img-thumbnail" id="image">
   				</div>
   			</div>
 
-        <div class="col-md-4" id="rightColumn">
+        <div id="rightColumn">
 
-          <div class="card" v-if="!permissionToUpdate">
+            <div class="card" v-if="!permissionToUpdate">
 
-            <div class="card-body">
-              <h3 class="card-title"> {{product.title}}</h3> 
-              <h1> Bs {{product.price}}</h1>
-              <h3>Stock: {{product.stock}}</h3>
+              <div class="card-body">
+                <h3 class="card-title"> {{product.title}}</h3> 
+                <h1> Bs {{product.price}}</h1>
+                <h3>Stock: {{product.stock}}</h3>
 
-              <div>
-                <p>{{product.description}}</p>
-              </div>
+                <div>
+                  <p>{{product.description}}</p>
+                </div>
 
-              <div class="form-group" id="buttons">
-                <button class="btn btn-outline-dark" v-if="product.stock>0">Buy</button>
-                <button class="btn btn-outline-dark" @click="addToCart()" v-if="permissionToAddToCart">Add to cart</button>
-              </div>
+                <div class="form-group" id="buttons">
+                  <button class="btn btn-outline-dark" v-if="product.stock>0">Buy</button>
+                  <button class="btn btn-outline-dark" @click="addToCart()" v-if="permissionToAddToCart">Add to cart</button>
+                </div>
 
-              <button class="btn btn-success" @click="clickToUpdate()" v-if="$cookie.get('token') && JSON.parse($cookie.get('user')).rol=='admin'">Update</button>
-             
-            </div>            
-          </div>
+                <button class="btn btn-success" @click="clickToUpdate()" v-if="$cookie.get('token') && JSON.parse($cookie.get('user')).rol=='admin'">Update</button>
+               
+              </div>            
+            </div>
 
-          <div class="card" v-if="permissionToUpdate">
-            <div class="card-body">
+            <div class="card" v-if="permissionToUpdate">
+              <div class="card-body">
 
-              <div class="form-group" id="TitleInput">
+                <div class="form-group" id="TitleInput">
 
-                <input 
-                class="form-control"
-                type="text" 
-                placeholder="New title for the product" 
-                v-model.trim="$v.productToUpdate.title.$model"  
-                :class="{'is-invalid':$v.productToUpdate.title.$error,'is-valid':!$v.productToUpdate.title.$invalid}"
-                >
+                  <input 
+                  class="form-control"
+                  type="text" 
+                  placeholder="New title for the product" 
+                  v-model.trim="$v.productToUpdate.title.$model"  
+                  :class="{'is-invalid':$v.productToUpdate.title.$error,'is-valid':!$v.productToUpdate.title.$invalid}"
+                  >
 
-                <span class="invalid-feedback" v-if="!$v.productToUpdate.title.required">Este campo no puede ser vacio</span>
-                <span  class="invalid-feedback"  v-if="!$v.productToUpdate.title.maxLength">El titulo no puedde pasar de 35 caracteres</span> 
-              </div>
+                  <span class="invalid-feedback" v-if="!$v.productToUpdate.title.required">Este campo no puede ser vacio</span>
+                  <span  class="invalid-feedback"  v-if="!$v.productToUpdate.title.maxLength">El titulo no puedde pasar de 35 caracteres</span> 
+                </div>
 
-              <div class="form-group" id="PriceInput">
+                <div class="form-group" id="PriceInput">
 
-                <input 
-                class="form-control"
-                type="text" 
-                placeholder="New Price for the product" 
-                v-model.trim="$v.productToUpdate.price.$model"  
-                :class="{'is-invalid':$v.productToUpdate.price.$error,'is-valid':!$v.productToUpdate.price.$invalid}"
-                >
+                  <input 
+                  class="form-control"
+                  type="text" 
+                  placeholder="New Price for the product" 
+                  v-model.trim="$v.productToUpdate.price.$model"  
+                  :class="{'is-invalid':$v.productToUpdate.price.$error,'is-valid':!$v.productToUpdate.price.$invalid}"
+                  >
+                  
+                  <span class="invalid-feedback" v-if="!$v.productToUpdate.price.required">Este campo no puede ser vacio</span>
+
+                  <span class="invalid-feedback" v-if="!$v.productToUpdate.price.integer">It should be integer</span>
+
+                  <span class="invalid-feedback" v-if="!$v.productToUpdate.price.minValue">It must be greater than zero. </span>
+                </div>
+
+                <div class="form-group" id="StockInput">
+
+                  <input 
+                  class="form-control"
+                  type="text" 
+                  placeholder="New Stock for the product" 
+                  v-model.trim="$v.productToUpdate.stock.$model"  
+                  :class="{'is-invalid':$v.productToUpdate.stock.$error,'is-valid':!$v.productToUpdate.stock.$invalid}"
+                  >
+                  
+                  <span class="invalid-feedback" v-if="!$v.productToUpdate.stock.required">Este campo no puede ser vacio</span>
+
+                  <span class="invalid-feedback" v-if="!$v.productToUpdate.stock.integer">It should be integer</span>
+
+                  <span class="invalid-feedback" v-if="!$v.productToUpdate.stock.minValue">It must be greater than zero. </span>
                 
-                <span class="invalid-feedback" v-if="!$v.productToUpdate.price.required">Este campo no puede ser vacio</span>
 
-                <span class="invalid-feedback" v-if="!$v.productToUpdate.price.integer">It should be integer</span>
+                </div class="form-group" id="DescriptionInput">
+                  <textarea
+                  class="form-control"
+                  placeholder="New Description for the product" 
+                  v-model.trim="$v.productToUpdate.description.$model" 
+                  :class="{'is-invalid':$v.productToUpdate.description.$error,'is-valid':!$v.productToUpdate.description.$invalid}"
+                  ></textarea> 
 
-                <span class="invalid-feedback" v-if="!$v.productToUpdate.price.minValue">It must be greater than zero. </span>
-              </div>
+                 <span class="invalid-feedback" v-if="$v.productToUpdate.description.required">Este campo no puede ser vacio</span> 
+                </div>
 
-              <div class="form-group" id="StockInput">
-
-                <input 
-                class="form-control"
-                type="text" 
-                placeholder="New Stock for the product" 
-                v-model.trim="$v.productToUpdate.stock.$model"  
-                :class="{'is-invalid':$v.productToUpdate.stock.$error,'is-valid':!$v.productToUpdate.stock.$invalid}"
-                >
-                
-                <span class="invalid-feedback" v-if="!$v.productToUpdate.stock.required">Este campo no puede ser vacio</span>
-
-                <span class="invalid-feedback" v-if="!$v.productToUpdate.stock.integer">It should be integer</span>
-
-                <span class="invalid-feedback" v-if="!$v.productToUpdate.stock.minValue">It must be greater than zero. </span>
-              
-
-              </div class="form-group" id="DescriptionInput">
-                <textarea
-                class="form-control"
-                placeholder="New Description for the product" 
-                v-model.trim="$v.productToUpdate.description.$model" 
-                :class="{'is-invalid':$v.productToUpdate.description.$error,'is-valid':!$v.productToUpdate.description.$invalid}"
-                ></textarea> 
-
-               <span class="invalid-feedback" v-if="$v.productToUpdate.description.required">Este campo no puede ser vacio</span> 
-              </div>
-
-              <div class="form-group" id="Buttons">
-                 <button class="btn btn-success" @click="updateProduct()">Update</button>
-                 <button class="btn btn-danger" @click="cancelTheUpdate()">Cancel</button>
-              </div> 
-          </div>
+                <div class="form-group" id="Buttons">
+                   <button class="btn btn-success" @click="updateProduct()">Update</button>
+                   <button class="btn btn-danger" @click="cancelTheUpdate()">Cancel</button>
+                </div> 
+            </div>
         </div>
 
         <input id="QuantityInput" v-if="permissionToAddProductToCart"    class="form-control" type="text" placeholder="Enter the quantity" v-model="productToCart.quantity">
@@ -254,7 +254,7 @@ export default{
 <style>
 
 #leftColumn{
-  width:80%;  
+  width:70%;  
   height: auto;
   padding: 20px;
 }
@@ -262,12 +262,42 @@ export default{
 
 #rightColumn{
   padding: 20px;
+  width: 30%;
 }
 
 .ProductTitle{
   margin-bottom: 50px;
   background:black;
 }
+
+#image{
+  height: 500px;
+  width: 100%;
+}
+
+.row{
+  display: flex;
+
+  /*Primera propiedad*/
+  flex-direction:row; 
+
+}
+
+@media screen and (max-width: 800px){
+  #leftColumn{
+  width:100%;  
+  height: auto;
+  padding: 20px;
+}
+
+
+#rightColumn{
+  padding: 20px;
+  width: 100%;
+}
+
+}
+
 
 
 </style>
