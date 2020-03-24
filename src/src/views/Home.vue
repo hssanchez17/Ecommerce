@@ -3,7 +3,7 @@
 
   <!--  Este es el navbar-->
   <b-navbar toggleable="lg" type="dark" variant="info">
-    <b-navbar-brand href="#">NavBar</b-navbar-brand>
+    <b-navbar-brand href="#">Dela Cream</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -32,7 +32,7 @@
   <!--  Este es el navbar-->
   <div class="container2">
     <h1><a href='#'>Last Products</a></h1>
-    <h4><a href='#'>Last Products</a></h4>
+    <h4><a href="/products">All Products</a></h4>
   </div>
 
   <!-- products list-->  
@@ -55,7 +55,8 @@
     </div>
   </div> 
 
-  <h4><a href='#'>View all</a></h4>
+  <!-- products list--> 
+
 
 
   
@@ -88,9 +89,6 @@ export default {
       this.axios.get(`product/show/all`)
         .then((response) => {
           this.listOfProducts=response.data.products
-          this.product1=response.data.products[0]
-          this.product2=response.data.products[1]
-          this.product3=response.data.products[2]
         })
         .catch((e)=>{
           console.log('error' + e);
@@ -128,24 +126,17 @@ export default {
 .container .container2{
   display:flex;
   flex-direction:row;
-  width: 100%;
-  background: green;
+  justify-content:space-between;
 }
 
 
 .container h1{
   margin-top: 2%;
   margin-bottom: 1%;
-  text-align: left;
-}
-
-.container h4{
-  background: black;
-  text-align: right;
 }
 
 .container h1 a,.container h4 a{
-  color:#797979;
+   color:#797979;
    text-decoration:none; 
    transition: all 1.5s ease;
 }
@@ -154,10 +145,14 @@ export default {
   color: black;
 }
 
-.btn{
-  float: right;
-
+.container .container2 h4{  
+  text-align: center;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
 }
+
+
 
 
 </style>

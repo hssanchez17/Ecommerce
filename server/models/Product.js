@@ -36,7 +36,7 @@ class Product{
 	getAll(){
 		return new Promise((resolve, reject) => {
 			/*remember change the query hermes...*/
-			const query='SELECT * FROM products ORDER BY id DESC LIMIT 3;'
+			const query='SELECT * FROM products ORDER BY id DESC;'
 			database.query(query)
 
 			.then(function(response){
