@@ -1,49 +1,74 @@
 <template>
-  <div>
-    <Navbar></Navbar>
-    <div class="container">
-      <div class="padre">
-        <h1>The best place to eat the best ice cream</h1>  
+<div class="container">
+  <b-navbar toggleable="lg" type="dark" variant="info">
+    <b-navbar-brand href="#">NavBar</b-navbar-brand>
+
+    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+    <b-collapse id="nav-collapse" is-nav>
+
+      <!-- Right aligned nav items -->
+      <b-navbar-nav class="ml-auto">
+        <b-nav-form>
+          <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
+          <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
+        </b-nav-form>
+
+        <b-nav-item-dropdown right>
+          <template v-slot:button-content>
+            <em>User</em>
+          </template>
+          <b-dropdown-item href="#">Profile</b-dropdown-item>
+          <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+        </b-nav-item-dropdown>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
+
+  
+    <Slider></Slider>
+
+
+  <h1><a href='#'>Last Products</a></h1>
+
+  <div class="row" id="listOfProducts">
+    <div class="col-md-4"  v-for="product in listOfProducts">    
+      <div class="card">
+
+        <div class="inner">
+          <a :href="'/product/show/'+ product.id">
+            <img :src="product.imageurl"  id="profilePicture">
+          </a>
+        </div>
+
+        <div class="card-body">
+          <h5 class="card-title"> {{product.title}}</h5>
+          <strong> {{product.price}} Bs</strong>
+          <p>{{product.description}}</p>
+        </div>
       </div>
-  </div>
+    </div>
+</div> 
 
-    <div class="container" id="container">
-        <h1>New merchandise</h1>
-
-        <div class="row" id="listOfProducts">
-          <div class="col-md-4"  v-for="product in listOfProducts">
-              
-            <div class="card">
-
-              <div class="inner">
-                <a :href="'/product/show/'+ product.id">
-                  <img :src="product.imageurl"  id="profilePicture">
-                </a>
-              </div>
-
-                <div class="card-body">
-                  <h5 class="card-title"> {{product.title}}</h5>
-                  <strong> {{product.price}} Bs</strong>
-                  <p>{{product.description}}</p>
-                </div>
-            </div>
-          </div>
-        </div> 
-    </div> 
-  </div>
+</div>
 </template>
+
 
 <script>
   import Navbar from '@/components/Navbar.vue'
+  import Slider from '@/components/Slider.vue'
 
 export default {
-  components: {Navbar},
+  components: {Navbar,Slider},
   name: 'Home',
 
 
   data() {
     return {
-      listOfProducts:{}
+      listOfProducts:{},
+      product1:'',
+      product2:'',
+      product3:''
     }
   },
 
@@ -55,13 +80,15 @@ export default {
     getAllProducts(){
       this.axios.get(`product/show/all`)
         .then((response) => {
-          console.log(response.data)
           this.listOfProducts=response.data.products
+          this.product1=response.data.products[0]
+          this.product2=response.data.products[1]
+          this.product3=response.data.products[2]
         })
         .catch((e)=>{
           console.log('error' + e);
         })
-    }
+    },
  
   }
 }
@@ -69,10 +96,9 @@ export default {
 
 
 <style>
-body{
-  margin:0;
+* {
+  margin: 0;
   padding: 0;
-  font-family: sans-serif;  
 }
 
 .inner{
@@ -80,45 +106,30 @@ body{
   height: 300px;
   overflow: hidden;
 }
-
 .inner #profilePicture{
   transition: all 1.5s ease;
 }
-
 #profilePicture{
   width: 100%;
   height: 100%;
 }
-
-
 #profilePicture:hover{
   transform: scale(1.5);
 }
 
-.padre{
-  background: #ccc;
-  display: table;
-  height: 600px;
-  margin: 2rem auto;
-  text-align: center;
-  width: 100%;
-  background-image: url('https://previews.123rf.com/images/andreadonetti/andreadonetti1603/andreadonetti160300055/54336392-display-of-assorted-ice-creams-in-metal-tubs-in-a-shop-or-ice-cream-parlour.jpg');
+.container h1{
+  margin-top: 2%;
+  margin-bottom: 1%;
+  text-align: left;
 }
 
-.padre h1{
-  background-size: 100% 100%;
-  background-color: rgba(0,0,0,0.5);
-  display: table-cell;
-  margin: 0;
-  padding: 0 1rem;
-  vertical-align: middle;
-  color:white;
-  opacity: 0;
-  transition: 1s;
+.container h1 a{
+  color:#797979;
+   text-decoration:none; 
 }
 
-.padre h1:hover{
-  opacity: 1;
+.container h1 a:hover{
+  color: black;
 }
 
 
