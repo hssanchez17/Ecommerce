@@ -22,7 +22,7 @@
 
       <!-- Slides with custom text -->
       <b-carousel-slide img-src="https://www.siparum.com/wp-content/uploads/helado-ron-02-1024x480.jpg">
-        <h2>Hello world!</h2>
+        <h1>Hello world!</h1>
       </b-carousel-slide>
 
       <!-- Slides with image only -->
@@ -39,7 +39,8 @@
 	export default {
   data(){
     return{
-
+    	slide: 0,
+        sliding: null
 
     }
   },

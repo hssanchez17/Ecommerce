@@ -1,5 +1,7 @@
 <template>
 <div class="container">
+
+  <!--  Este es el navbar-->
   <b-navbar toggleable="lg" type="dark" variant="info">
     <b-navbar-brand href="#">NavBar</b-navbar-brand>
 
@@ -27,10 +29,13 @@
 
   
     <Slider></Slider>
+  <!--  Este es el navbar-->
+  <div class="container2">
+    <h1><a href='#'>Last Products</a></h1>
+    <h4><a href='#'>Last Products</a></h4>
+  </div>
 
-
-  <h1><a href='#'>Last Products</a></h1>
-
+  <!-- products list-->  
   <div class="row" id="listOfProducts">
     <div class="col-md-4"  v-for="product in listOfProducts">    
       <div class="card">
@@ -48,7 +53,12 @@
         </div>
       </div>
     </div>
-</div> 
+  </div> 
+
+  <h4><a href='#'>View all</a></h4>
+
+
+  
 
 </div>
 </template>
@@ -65,10 +75,7 @@ export default {
 
   data() {
     return {
-      listOfProducts:{},
-      product1:'',
-      product2:'',
-      product3:''
+      listOfProducts:{}
     }
   },
 
@@ -113,9 +120,18 @@ export default {
   width: 100%;
   height: 100%;
 }
+
 #profilePicture:hover{
   transform: scale(1.5);
 }
+
+.container .container2{
+  display:flex;
+  flex-direction:row;
+  width: 100%;
+  background: green;
+}
+
 
 .container h1{
   margin-top: 2%;
@@ -123,13 +139,24 @@ export default {
   text-align: left;
 }
 
-.container h1 a{
-  color:#797979;
-   text-decoration:none; 
+.container h4{
+  background: black;
+  text-align: right;
 }
 
-.container h1 a:hover{
+.container h1 a,.container h4 a{
+  color:#797979;
+   text-decoration:none; 
+   transition: all 1.5s ease;
+}
+
+.container h1 a:hover,.container h4 a:hover{
   color: black;
+}
+
+.btn{
+  float: right;
+
 }
 
 
