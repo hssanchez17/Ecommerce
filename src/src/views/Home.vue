@@ -108,12 +108,13 @@ export default {
 
 .inner{
   width: 100%; 
-  height: 300px;
+  height: 250px;
   overflow: hidden;
 }
 .inner #profilePicture{
   transition: all 1.5s ease;
 }
+
 #profilePicture{
   width: 100%;
   height: 100%;
