@@ -1,7 +1,38 @@
 s<template>
 <div>
-  <Navbar></Navbar>
 	<div class="container">
+
+
+  <!--  Este es el navbar-->
+  <b-navbar toggleable="lg" type="dark" variant="info">
+    <b-navbar-brand href="#">Dela Cream</b-navbar-brand>
+
+    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+    <b-collapse id="nav-collapse" is-nav>
+
+      <!-- Right aligned nav items -->
+      <b-navbar-nav class="ml-auto">
+        <b-nav-form>
+          <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
+          <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
+        </b-nav-form>
+
+        <b-nav-item-dropdown right>
+          <template v-slot:button-content>
+            <em>User</em>
+          </template>
+          <b-dropdown-item href="#">Profile</b-dropdown-item>
+          <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+        </b-nav-item-dropdown>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
+
+  
+  <!--  Este es el navbar-->
+
+
   		<div class="row">
 
   			<div id="leftColumn">
@@ -254,14 +285,19 @@ export default{
 <style>
 
 #leftColumn{
-  width:70%;  
-  height: auto;
-  padding: 20px;
+  width:68%;  
+  height: 500px;  
+  background: black;
+  margin-right: 2%;
+}
+
+#leftColumn .card img{
+  width: 100%;
+  height: 700px;
 }
 
 
 #rightColumn{
-  padding: 20px;
   width: 30%;
 }
 
@@ -270,16 +306,13 @@ export default{
   background:black;
 }
 
-#image{
-  height: 500px;
-  width: 100%;
-}
 
 .row{
   display: flex;
-
-  /*Primera propiedad*/
   flex-direction:row; 
+  width: 100%;
+  margin: auto;
+  margin-top:1%; 
 
 }
 
@@ -287,12 +320,16 @@ export default{
   #leftColumn{
   width:100%;  
   height: auto;
-  padding: 20px;
+}
+
+#leftColumn .card img{
+  width: 100%;
+  height: 350px;
 }
 
 
 #rightColumn{
-  padding: 20px;
+  margin-top: 3%;
   width: 100%;
 }
 

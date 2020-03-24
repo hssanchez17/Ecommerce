@@ -28,8 +28,9 @@
     </b-navbar>
 
   
-    <Slider></Slider>
   <!--  Este es el navbar-->
+
+  <Slider></Slider>
   <div class="container2">
     <h1><a href='#'>Last Products</a></h1>
     <h4><a href="/products">All Products</a></h4>
