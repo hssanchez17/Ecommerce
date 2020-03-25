@@ -1,14 +1,12 @@
 <template>
 	<div>
-		<Navbar></Navbar>
 		<div class="container">
+      <Navbar></Navbar>
     	<div class="row justify-content-center">
         	<div class="col-md-12">
             	<div class="card">
                 <div class="card-header">
                 	<h1>List Of Types Of Products</h1>
-                   <a class="btn btn-success" :href="`/type-of-product/create`" 
-                    v-if="$cookie.get('token') && JSON.parse($cookie.get('user')).rol=='admin'">Create A Type Of Product</a>
                  </div>   
                 	<div class="card-body">
                     <div class="table-responsive">
@@ -17,18 +15,14 @@
                             	<tr>
                             		<th scope="col">Id</th>
                             		<th scope="col">title</th>
-                             	    <th scope="col">Description</th>
+                             	  <th scope="col">Description</th>
                             	</tr>
                             </thead>
 
                             <tr v-for="(typeOfProduct,index) in listOfTypeOfProducts" :key="index"> 
                            		<td>{{typeOfProduct.id}}</td>
-                           		<td>{{typeOfProduct.title}}</td>
+                           		<td><a :href="`/type-of-product/show/`+ typeOfProduct.id">{{typeOfProduct.title}}</a></td>
                            		<td>{{typeOfProduct.description}}</td>
-                           		<td>
-                                   
-                                <a class="btn btn-warning" :href="`/type-of-product/show/`+ typeOfProduct.id">Update</a>
-                                </td>
                             </tr>
 
                            </table>

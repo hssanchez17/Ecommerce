@@ -1,13 +1,14 @@
 <template>
 	<div>
-		<Navbar></Navbar>
+		
 
 		<div class="container">
+			<Navbar></Navbar>
 			<div class="row row justify-content-md-center">
 				<div class="col-md-8">
 					<div class="card">
 
-						<div class="card-header bg-primary">
+						<div class="card-header bg-info">
             				<h3 class="card-title text-white">Manage Type Of Products</h3>
           				</div>
 
@@ -39,7 +40,7 @@
 					              This field cannot be empty.
 					        	  </span>
 				    		</div>
-				    		<button class="btn btn-success" @click="createTypeOfProduct()">Upload Post</button>
+				    		<button class="btn btn-success" @click="createTypeOfProduct()">Create</button>
 </div>
 		</div>
 	</div>

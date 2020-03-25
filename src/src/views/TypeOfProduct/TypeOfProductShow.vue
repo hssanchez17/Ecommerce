@@ -1,12 +1,13 @@
 <template>
 	<div>
-		<Navbar></Navbar>
+		
 		<div class="container" id="profile-info">
+      <Navbar></Navbar>
     		<div class="row justify-content-md-center">
       			<div class="col-md-8" id="UserInformation">
       				<div class="card">
-      					<div class="card-header bg-primary">
-            				<h3 class="card-title text-white">{{typeOfProduct.title}}</h3>
+      					<div class="card-header bg-info">
+            				<h3 class="card-title text-white">Type Of Product</h3>
           				</div>
 
           				<div class="card-body text-center" v-if="!permissionToUpdate">
@@ -54,7 +55,8 @@
 				    		</div>
 				    		
 </div>
-						<button class="btn btn-warning" @click="update()">Update</button>
+      						<button class="btn btn-warning" @click="update()">Update</button>
+                  <button class="btn btn-danger" @click="cancel()">Cancel</button>
                     </div>
                     
 
@@ -117,7 +119,11 @@ export default{
       getPermissionsToUpdate(){
       	this.typeOfProductToUpdate=this.typeOfProduct;
       	this.permissionToUpdate=true;
+      },
 
+      cancel(){
+        this.typeOfProductToUpdate=this.typeOfProduct;;
+        this.permissionToUpdate=false;
       },
 
       update(){

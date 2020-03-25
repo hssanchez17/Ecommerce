@@ -1,12 +1,20 @@
 <template>
 <div>
-   <Navbar></Navbar>
 	<div class="container">
+
+
+  <!--  Este es el navbar-->
+  <Navbar></Navbar>
+  
+  <!--  Este es el navbar-->
+
+
+
     <div class="row row justify-content-md-center">
       <div class="col-md-8">
         <div class="card">
 
-          <div class="card-header bg-primary">
+          <div class="card-header bg-info">
             <h3 class="card-title text-white">Login</h3>
           </div>
 

@@ -1,12 +1,12 @@
 <template>
   <div>
-  <Navbar></Navbar>
   <div class="container">
+     <Navbar></Navbar>
     <div class="row row justify-content-md-center">
       <div class="col-md-8">
         <div class="card">
 
-          <div class="card-header bg-primary">
+          <div class="card-header bg-info">
             <h3 class="card-title text-white">Register</h3>
           </div>
 

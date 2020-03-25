@@ -1,12 +1,13 @@
 <template>
   <div>
-    <Navbar></Navbar>
 	<div class="container">
+    <Navbar></Navbar>
+
 		<div class="row row justify-content-md-center">
 			<div class="col-md-8">
 				<div class="card">
 
-					<div class="card-header bg-primary">
+					<div class="card-header bg-info">
             <h3 class="card-title text-white">Manage Products</h3>
           </div>
 
@@ -105,6 +106,7 @@
 				</div>
 			</div>
 		</div>
+
 	</div>
   </div>
 	
@@ -155,7 +157,6 @@ export default{
       this.axios.get(`type-of-product/show/all`)
         .then((response) => {
               this.listOfTypeOfProducts= response.data.typeOfProducts;
-            console.log(this.listOfTypeOfProducts)
           })
           .catch((e)=>{
               console.log('error' + e);
