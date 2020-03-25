@@ -36,9 +36,9 @@ class Product{
 
 	getAllTypeOfProductsFromAProduct(productId){
 		return new Promise((resolve, reject) => {
-			const query=`SELECT *
-						 FROM products_typeofproducts 
-						 RIGHT JOIN typeofproduct 
+			const query=`SELECT * 
+						FROM products_typeofproducts  
+						JOIN typeofproduct 
 							ON products_typeofproducts.typeofproductId=typeofproduct.id 
 							AND products_typeofproducts.productId=$1;`
 			const value = [productId]

@@ -32,12 +32,7 @@ s<template>
                 </div>
 
 
-                <div class="containerx">
-                  <div v-for="(product,index) in product.typeOfProduct" :key="index" class="TypeList">
-                    <b-button variant="outline-primary" pill size="sm">{{product.title}}</b-button>
-                </div> 
-                  
-                </div>
+                
             
 
 
@@ -57,6 +52,14 @@ s<template>
                   <button class="btn btn-outline-dark" @click="buyAProduct()">Buy</button>
                   <button class="btn btn-outline-danger" @click="CancelPurchase()">Cancel</button>
                 
+                </div>
+
+
+                <div class="containerx">
+                  <div v-for="(product,index) in product.typeOfProduct" :key="index" class="TypeList">
+                    <b-button variant="outline-primary" pill size="sm">{{product.title}}</b-button>
+                </div> 
+                  
                 </div>
                
               </div>            
@@ -367,9 +370,12 @@ export default{
 
 
 .containerx{
+  width: 100%;
   display: flex;
   flex-direction:row;
   flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 5%;
 }
 
 
