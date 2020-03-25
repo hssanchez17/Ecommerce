@@ -108,6 +108,7 @@ export default {
        .then(res => {
           alert('Your session was closed')
           this.$cookie.delete('token', {domain: 'localhost'});
+          this.$cookie.delete('user', {domain: 'localhost'});
           this.$router.push({ path: `/` }).catch(err => {})
           this.userLogedPermission=false
         })

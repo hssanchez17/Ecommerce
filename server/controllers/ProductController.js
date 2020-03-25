@@ -18,28 +18,24 @@ class ProductController{
 		    const product= new Product()
 			product.create(title,description,price,stock,imageUrl,public_id)
 			.then(function(productId){
-				var {listOfTypeOfProducts}=req.body;
-				console.log(listOfTypeOfProducts[1])
-				console.log(listOfTypeOfProducts.length)
-				 res.status(200).json('successful product registration')
+				var listOfTypeOfProducts=req.body.listOfTypeOfProducts;
+				listOfTypeOfProducts=listOfTypeOfProducts.split(',')
 
-				/*var promiseArray=[]
-				var {listOfTypeOfProducts}=req.body;
-				console.log(listOfTypeOfProducts.length)
-
-				listOfTypeOfProducts.map(function(typeOfProduct){       
-                 return promiseArray.push(product.associateAProductWithItsType(productId,typeOfProduct.id))
+				var promiseArray=[]
+				listOfTypeOfProducts.map(function(typeOfProductId){      
+                 return promiseArray.push(product.associateAProductWithItsType(productId,typeOfProductId))
         		});
 
 				Promise.all(promiseArray)
         		.then(function(){ res.status(200).json('successful product registration')})
-        		.catch(err => res.status(400).json('Error: ' + err));*/
+        		.catch(err => res.status(400).json('Error: ' + err));
 
 			})
-			//.catch(e => console.error(e.stack))
+			.catch(err => res.status(400).json('Error: ' + err));
+			
 		})
 
-		.catch(err => res.status(400).json('Error: ' + err));
+		.catch(err => res.status(400).json('Error: ' + err));/*I need to fix that shit*/
 	}
 
 	getAll(req,res){
@@ -58,6 +54,15 @@ class ProductController{
 			if(product==null) res.status(200).json("Error:that product doesn't exsist")
 	    	else  res.send(product)
 		})
+		.catch(e => console.error(e.stack))
+	}
+
+
+	getTheFirst3(req,res){
+		const product= new Product()
+
+		product.getTheFirst3()
+		.then(function(products){ res.status(200).json({products:products})})
 		.catch(e => console.error(e.stack))
 	}
 

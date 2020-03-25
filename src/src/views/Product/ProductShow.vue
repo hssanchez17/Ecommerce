@@ -32,11 +32,22 @@ s<template>
                 </div>
 
                 <div class="form-group" id="buttons">
-                  <button class="btn btn-outline-dark" v-if="product.stock>0">Buy</button>
+                  <button class="btn btn-outline-dark" v-if="product.stock>0" @click="showBuyAProductInputs()">Buy</button>
                   <button class="btn btn-outline-dark" @click="addToCart()" v-if="permissionToAddToCart">Add to cart</button>
                 </div>
 
+
+
                 <button class="btn btn-success" @click="clickToUpdate()" v-if="$cookie.get('token') && JSON.parse($cookie.get('user')).rol=='admin'">Update</button>
+
+
+                <div class="BuyAProductInformation" v-if="permissionToBuyProduct">
+                  <input id="QuantityInput" class="form-control" type="text" placeholder="Enter the quantity" v-model="order.quantity">
+
+                  <button class="btn btn-outline-dark" @click="buyAProduct()">Buy</button>
+                  <button class="btn btn-outline-danger" @click="CancelPurchase()">Cancel</button>
+                
+                </div>
                
               </div>            
             </div>
@@ -110,7 +121,6 @@ s<template>
             </div>
         </div>
 
-        <input id="QuantityInput" v-if="permissionToAddProductToCart"    class="form-control" type="text" placeholder="Enter the quantity" v-model="productToCart.quantity">
       </div>
     </div>
   </div>	
@@ -144,6 +154,10 @@ export default{
         description:'',
         price:'',
         stock:''
+      },
+
+      order:{
+        quantity:'',
       },
 
       permissionToAddProductToCart:false,
@@ -251,7 +265,29 @@ export default{
           console.log('error' + e);
         })
 
-      }
+      },
+
+      showBuyAProductInputs(){
+      
+        this.permissionToBuyProduct=true;
+
+      },
+
+      CancelPurchase(){
+        this.permissionToBuyProduct=false;        
+      },
+
+      buyAProduct(){
+        this.axios.post(` /buy/product/from-cart/${this.product.id}`,this.order)
+        .then((response) => {
+          alert('Your bought the product')
+          this.$router.push({ path: `/` })
+        })
+        .catch((e)=>{
+          console.log('error' + e);
+        })
+
+    }
     }
 
 }	
@@ -310,6 +346,11 @@ export default{
   width: 100%;
 }
 
+}
+
+.BuyAProductInformation{
+  display: flex;
+  flex-direction:row;
 }
 
 

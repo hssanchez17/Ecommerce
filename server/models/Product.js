@@ -48,6 +48,20 @@ class Product{
 		})
 	}
 
+	getTheFirst3(){
+		return new Promise((resolve, reject) => {
+			const query='SELECT * FROM products ORDER BY id DESC LIMIT 3;'
+			database.query(query)
+
+			.then(function(response){
+				const products=response.rows
+				resolve(products)
+			})
+			.catch(e => console.error(e.stack))
+
+		})
+	}
+
 	update(id){
 		return new Promise((resolve, reject) => {
 			const query='UPDATE products SET title=$1,description=$2,price=$3,stock=$4 WHERE id=$5'

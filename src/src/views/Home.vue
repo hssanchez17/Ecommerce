@@ -64,7 +64,7 @@ export default {
 
   methods:{
     getAllProducts(){
-      this.axios.get(`product/show/all`)
+      this.axios.get(`product/show/3`)
         .then((response) => {
           this.listOfProducts=response.data.products
         })

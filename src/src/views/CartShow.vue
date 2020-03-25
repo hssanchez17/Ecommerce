@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <Navbar></Navbar>
   	<div class="container">
+       <Navbar></Navbar>
     	<div class="row justify-content-center">
         	<div class="col-md-12">
             	<div class="card">

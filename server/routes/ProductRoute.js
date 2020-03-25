@@ -10,6 +10,7 @@ var productController= new ProductController
 
 router.post('/create',upload.single('imageUrl'),productValidationRules(),validate,productController.create)
 router.get('/show/all',productController.getAll)
+router.get('/show/3',productController.getTheFirst3)
 router.get('/show/:id',productController.get)
 router.put('/update/:id',productController.update)
 router.delete('/destroy/:id',productController.destroy)
