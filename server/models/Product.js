@@ -116,6 +116,7 @@ class Product{
 			.catch(e => console.error(e.stack))
 		})
 	}
+
 	associateAProductWithItsType(productId,typeOfProductId){
 
 		return new Promise((resolve, reject) => {
@@ -128,7 +129,6 @@ class Product{
 
 
 		})
-
 	}
 
 }

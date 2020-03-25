@@ -50,6 +50,12 @@ const routes = [
     component:()=>import('../views/Product/ProductShowAll.vue')
   },
 
+  {
+    path:'/products/type-of-product/:titleOfTheTypeOfProduct',
+    name:'productShow',
+    component:()=>import('../views/Product/ShowAllProductsOfAProductType.vue')
+  },
+
   //CART
 
   {
