@@ -31,6 +31,16 @@ s<template>
                   <p>{{product.description}}</p>
                 </div>
 
+
+                <div class="containerx">
+                  <div v-for="(product,index) in product.typeOfProduct" :key="index" class="TypeList">
+                    <b-button variant="outline-primary" pill size="sm">{{product.title}}</b-button>
+                </div> 
+                  
+                </div>
+            
+
+
                 <div class="form-group" id="buttons">
                   <button class="btn btn-outline-dark" v-if="product.stock>0" @click="showBuyAProductInputs()">Buy</button>
                   <button class="btn btn-outline-dark" @click="addToCart()" v-if="permissionToAddToCart">Add to cart</button>
@@ -141,7 +151,8 @@ export default{
       	description:'',
       	price:'',
       	stock:'',
-      	imageUrl:''
+      	imageUrl:'',
+        typeOfProduct:{}
       },
 
       productToCart:{
@@ -205,6 +216,7 @@ export default{
         this.axios.get(`product/show/${this.id}`)
         .then((response) => {
           this.product= response.data;
+          console.log(this.product.typeOfProduct)
         })
         .catch((e)=>{
           console.log('error' + e);
@@ -351,6 +363,13 @@ export default{
 .BuyAProductInformation{
   display: flex;
   flex-direction:row;
+}
+
+
+.containerx{
+  display: flex;
+  flex-direction:row;
+  flex-wrap: wrap;
 }
 
 

@@ -33,6 +33,25 @@ class Product{
 		})
 	}
 
+
+	getAllTypeOfProductsFromAProduct(productId){
+		return new Promise((resolve, reject) => {
+			const query=`SELECT *
+						 FROM products_typeofproducts 
+						 RIGHT JOIN typeofproduct 
+							ON products_typeofproducts.typeofproductId=typeofproduct.id 
+							AND products_typeofproducts.productId=$1;`
+			const value = [productId]
+
+			database.query(query, value)
+		    .then(response => {
+		    	const typeofproducts=response.rows
+		    	resolve(typeofproducts)
+		    })
+
+		})
+	}
+
 	getAll(){
 		return new Promise((resolve, reject) => {
 			/*remember change the query hermes...*/

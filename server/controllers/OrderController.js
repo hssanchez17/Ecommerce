@@ -8,7 +8,6 @@ class OrderController{
 
 		const productId=req.params.productId
 		const {quantity}=req.body
-		console.lo
 
 		
 		const order= new Order()

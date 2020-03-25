@@ -50,9 +50,18 @@ class ProductController{
 		const product= new Product()
 
 		product.get(id)
-		.then(function(product){
+		.then(function(productInfo){
 			if(product==null) res.status(200).json("Error:that product doesn't exsist")
-	    	else  res.send(product)
+	    	else{
+	    		product.getAllTypeOfProductsFromAProduct(id)
+	    		.then(function(typeOfProduct){
+	    			productInfo.typeOfProduct=typeOfProduct
+	    			res.send(productInfo)
+	    		})
+	    		.catch(e => console.error(e.stack))
+
+
+	    	}  
 		})
 		.catch(e => console.error(e.stack))
 	}
