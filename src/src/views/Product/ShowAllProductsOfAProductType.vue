@@ -9,7 +9,7 @@
 
   <!--  Este es el navbar-->
 
-  <h1>Products</h1>
+  <h1>{{typeOfProduct.title}}</h1>
 
   <div class="row" id="listOfProducts">
     <div class="col-md-4"  v-for="article in displayedArticles">    
@@ -76,18 +76,31 @@ export default {
       perPage: 6,
       pages: [],
       typeOfProductId:this.$route.params.typeOfProductId,
+      typeOfProduct:{
+            title:'',
+            description:'',
+          },
+
     };
   },
   created() {
-    this.getPosts();
+    this.getProducts();
+    this.getTypeOfProduct()
   },
   methods: {
-    getPosts() {
+    getTypeOfProduct(){
+        this.axios.get(`/type-of-product/show/${this.typeOfProductId}`)
+        .then((response) => {
+          this.typeOfProduct= response.data;
+        })
+        .catch((e)=>{
+          console.log('error' + e);
+        })
+      },
+    getProducts() {
        this.axios.get(`product/show/products-by-type/${this.typeOfProductId}`)
         .then((response) => {
-           // console.log(response.data.products)
           this.articles=response.data.products
-          console.log(this.listOfProducts)
         })
         .catch((e)=>{
           console.log('error' + e);

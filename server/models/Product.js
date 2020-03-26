@@ -40,7 +40,10 @@ class Product{
 						FROM products_typeofproducts
 						JOIN products
 							ON products.id=products_typeofproducts.productId
-							AND products_typeofproducts.typeofproductId=$1`
+							AND products_typeofproducts.typeofproductId=$1
+						JOIN typeofproduct
+							ON typeofproduct.id=products_typeofproducts.typeofproductId
+							`
 
 			const value = [typeOfProductId]
 			
