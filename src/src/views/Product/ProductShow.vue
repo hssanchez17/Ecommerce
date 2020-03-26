@@ -57,7 +57,7 @@ s<template>
 
                 <div class="containerx">
                   <div v-for="(product,index) in product.typeOfProduct" :key="index" class="TypeList">
-                    <b-button variant="outline-primary" pill size="sm">{{product.title}}</b-button>
+                    <b-button variant="outline-primary" pill size="sm" :href="'/products/type-of-product/'+product.id">{{product.title}}</b-button>
                 </div> 
                   
                 </div>
