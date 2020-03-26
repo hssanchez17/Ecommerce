@@ -101,6 +101,17 @@ class ProductController{
 		.catch(e => console.error(e.stack))
 
 	}
+
+	getAllProductsByType(req,res){
+		const typeOfProductId=req.params.typeOfProductId
+		console.log(typeOfProductId)
+		const product= new Product()
+
+		product.getAllProductsByType(typeOfProductId)
+		.then(function(products){ res.status(200).json({products:products})})
+		.catch(e => console.error(e.stack))
+
+	}
 }
 
 module.exports={ProductController}

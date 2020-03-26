@@ -51,7 +51,7 @@ const routes = [
   },
 
   {
-    path:'/products/type-of-product/:titleOfTheTypeOfProduct',
+    path:'/products/type-of-product/:typeOfProductId',
     name:'productShow',
     component:()=>import('../views/Product/ShowAllProductsOfAProductType.vue')
   },

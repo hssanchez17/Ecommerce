@@ -74,7 +74,8 @@ export default {
       articles: [],
       page: 1,
       perPage: 6,
-      pages: []
+      pages: [],
+      typeOfProductId:this.$route.params.typeOfProductId,
     };
   },
   created() {
@@ -82,7 +83,7 @@ export default {
   },
   methods: {
     getPosts() {
-       this.axios.get(`product/show/all`)
+       this.axios.get(`product/show/products-by-type/${this.typeOfProductId}`)
         .then((response) => {
            // console.log(response.data.products)
           this.articles=response.data.products

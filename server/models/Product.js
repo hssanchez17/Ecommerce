@@ -33,6 +33,27 @@ class Product{
 		})
 	}
 
+	
+	getAllProductsByType(typeOfProductId){
+		return new Promise((resolve, reject) => {
+			const query=`SELECT * 
+						FROM products_typeofproducts
+						JOIN products
+							ON products.id=products_typeofproducts.productId
+							AND products_typeofproducts.typeofproductId=$1`
+
+			const value = [typeOfProductId]
+			
+			database.query(query, value)
+			.then(response => {
+				const typeofproducts=response.rows
+				resolve(typeofproducts)
+			})
+			.catch(e => console.error(e.stack))
+		})
+
+	}
+
 
 	getAllTypeOfProductsFromAProduct(productId){
 		return new Promise((resolve, reject) => {
@@ -48,13 +69,14 @@ class Product{
 		    	const typeofproducts=response.rows
 		    	resolve(typeofproducts)
 		    })
+		    .catch(e => console.error(e.stack))
 
 		})
 	}
 
 	getAll(){
 		return new Promise((resolve, reject) => {
-			/*remember change the query hermes...*/
+
 			const query='SELECT * FROM products ORDER BY id DESC;'
 			database.query(query)
 

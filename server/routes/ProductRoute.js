@@ -12,6 +12,7 @@ router.post('/create',upload.single('imageUrl'),productValidationRules(),validat
 router.get('/show/all',productController.getAll)
 router.get('/show/3',productController.getTheFirst3)
 router.get('/show/:id',productController.get)
+router.get('/show/products-by-type/:typeOfProductId',productController.getAllProductsByType)
 router.put('/update/:id',productController.update)
 router.delete('/destroy/:id',productController.destroy)
 	
