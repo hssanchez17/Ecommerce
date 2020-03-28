@@ -11,6 +11,20 @@
 
   <h1>Products</h1>
 
+  <div class="btn-group col-md-2 offset-md-5 pagination">
+    <button type="button" class="btn btn-sm btn-outline-secondary" v-if="page != 1" @click="page--">
+        <<
+    </button>
+    
+    <button type="button" class="btn btn-sm btn-outline-secondary" v-for="pageNumber in pages.slice(page-1, page+5)" @click="page = pageNumber" :key="pageNumber">
+      {{pageNumber}}
+    </button>
+
+    <button type="button" @click="page++" v-if="page < pages.length" class="btn btn-sm btn-outline-secondary">
+      >>
+    </button>
+  </div>
+
   <div class="row" id="listOfProducts">
     <div class="col-md-4"  v-for="article in displayedArticles">    
       <div class="card">
@@ -30,27 +44,7 @@
     </div>
 
 
-          <div class="btn-group col-md-2 offset-md-5">
-        <button
-          type="button"
-          class="btn btn-sm btn-outline-secondary"
-          v-if="page != 1"
-          @click="page--"
-        ><<</button>
-        <button
-          type="button"
-          class="btn btn-sm btn-outline-secondary"
-          v-for="pageNumber in pages.slice(page-1, page+5)"
-          @click="page = pageNumber"
-          :key="pageNumber"
-        >{{pageNumber}}</button>
-        <button
-          type="button"
-          @click="page++"
-          v-if="page < pages.length"
-          class="btn btn-sm btn-outline-secondary"
-        >>></button>
-      </div>
+  
 
       
 
@@ -62,7 +56,13 @@
 
 
     </div>
-  </div>
+  
+
+  
+    
+
+
+    </div>  
 </template>
 
 <script>
@@ -174,6 +174,13 @@ btn-group{
   white-space: nowrap;
   overflow: hidden;
   
+}
+
+.pagination{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 }
 
 </style>

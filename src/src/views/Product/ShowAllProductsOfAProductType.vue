@@ -16,7 +16,7 @@
       <div class="card">
 
         <div class="inner">
-          <a :href="'/product/show/'+ article.id">
+          <a :href="'/product/show/'+ article.productid">
             <img :src="article.imageurl"  id="profilePicture">
           </a>
         </div>
@@ -30,7 +30,20 @@
     </div>
 
 
-          <div class="btn-group col-md-2 offset-md-5">
+    
+
+      
+
+
+
+
+
+
+
+
+    </div>
+
+    <div class="btn-group col-md-2 offset-md-5">
         <button
           type="button"
           class="btn btn-sm btn-outline-secondary"
@@ -51,17 +64,6 @@
           class="btn btn-sm btn-outline-secondary"
         >>></button>
       </div>
-
-      
-
-
-
-
-
-
-
-
-    </div>
   </div>
 </template>
 
@@ -101,6 +103,7 @@ export default {
        this.axios.get(`product/show/products-by-type/${this.typeOfProductId}`)
         .then((response) => {
           this.articles=response.data.products
+          console.log(this.articles)
         })
         .catch((e)=>{
           console.log('error' + e);

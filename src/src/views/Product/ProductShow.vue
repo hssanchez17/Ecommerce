@@ -47,7 +47,22 @@ s<template>
 
 
                 <div class="BuyAProductInformation" v-if="permissionToBuyProduct">
-                  <input id="QuantityInput" class="form-control" type="text" placeholder="Enter the quantity" v-model="order.quantity">
+                   <div class="form-group" id="QuantityInput">
+
+                    <input 
+                      id="QuantityInput" 
+                      class="form-control" 
+                      type="text" 
+                      placeholder="Enter the quantity" 
+                      v-model="$v.order.quantity.$model"
+                      :class="{'is-invalid':$v.order.quantity.$error,'is-valid':!$v.order.quantity.$invalid}">
+
+
+                    <span class="invalid-feedback" v-if="!$v.order.quantity.required">Este campo no puede ser vacio</span>
+
+                    <span class="invalid-feedback" v-if="!$v.order.quantity.integer">It should be integer</span>
+                  
+                  </div>
 
                   <button class="btn btn-outline-dark" @click="buyAProduct()">Buy</button>
                   <button class="btn btn-outline-danger" @click="CancelPurchase()">Cancel</button>
@@ -56,8 +71,8 @@ s<template>
 
 
                 <div class="containerx">
-                  <div v-for="(product,index) in product.typeOfProduct" :key="index" class="TypeList">
-                    <b-button variant="outline-primary" pill size="sm" :href="'/products/type-of-product/'+product.id">{{product.title}}</b-button>
+                  <div v-for="(product2,index) in product.typeOfProduct" :key="index" class="TypeList">
+                    <b-button variant="outline-primary" pill size="sm" :href="'/products/type-of-product/'+product2.id">{{product2.title}}</b-button>
                 </div> 
                   
                 </div>
@@ -204,9 +219,16 @@ export default{
         },
         description:{
           required
-
         }
-      }
+      },
+
+        order:{
+           quantity:{
+            required,
+            integer
+           }
+        }
+
      },
 
   mounted(){
@@ -283,9 +305,8 @@ export default{
       },
 
       showBuyAProductInputs(){
-      
-        this.permissionToBuyProduct=true;
-
+        if(this.$cookie.get('token')) this.permissionToBuyProduct=true;
+        else alert('please login first')
       },
 
       CancelPurchase(){
@@ -293,9 +314,9 @@ export default{
       },
 
       buyAProduct(){
-        this.axios.post(` /buy/product/from-cart/${this.product.id}`,this.order)
+        this.axios.post(`order/buy/${this.id}`,this.order)
         .then((response) => {
-          alert('Your bought the product')
+          alert('You bought the product')
           this.$router.push({ path: `/` })
         })
         .catch((e)=>{

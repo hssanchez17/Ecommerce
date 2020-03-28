@@ -68,7 +68,7 @@
 
             <!-- Admin -->
             <b-dropdown-item href="/product/create" v-if="adminLogedPermission">Create Product</b-dropdown-item>
-             <b-dropdown-item href="/type-of-product/create" v-if="adminLogedPermission">Create Type of Product</b-dropdown-item>
+            <b-dropdown-item href="/type-of-product/create" v-if="adminLogedPermission">Create Type of Product</b-dropdown-item>
 
         </b-nav-item-dropdown>
         </b-navbar-nav>
@@ -120,7 +120,7 @@ export default {
     userLogedPermissionFunction(){
       if(this.$cookie.get('token')==null)this.userLogedPermission=false
       if(this.$cookie.get('token')!=null){
-        if(JSON.parse(this.$cookie.get('user')).rol) this.adminLogedPermission=true;
+        if(JSON.parse(this.$cookie.get('user')).rol=='admin') this.adminLogedPermission=true;
         this.userLogedPermission=true
       }
     }

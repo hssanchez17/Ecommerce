@@ -106,10 +106,10 @@ class Product{
 		})
 	}
 
-	update(id){
+	update(title,description,price,stock,id){
 		return new Promise((resolve, reject) => {
 			const query='UPDATE products SET title=$1,description=$2,price=$3,stock=$4 WHERE id=$5'
-			const values = [this.title,this.description,this.price,this.stock,id]
+			const values = [title,description,price,stock,id]
 
 			database.query(query, values)
 			.then(function(){resolve(true)})

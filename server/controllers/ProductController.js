@@ -78,9 +78,9 @@ class ProductController{
 	update(req,res){
 		const {title,description,price,stock}=req.body
 		const id=req.params.id
-		const product= new Product(title,description,price,stock,'','')
+		const product= new Product()
 		
-		product.update(id)
+		product.update(title,description,price,stock,id)
 		.then(function(product){res.status(200).json('successful product update')})
 		.catch(e => console.error(e.stack))
 

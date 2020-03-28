@@ -180,6 +180,7 @@ export default{
         	this.axios.post('product/create',fd)
           	.then(res => {
             	alert('the product was created correctly')
+              this.$router.push({ path: `/` })
            	})
           	.catch( e => {
             	console.log(e)  

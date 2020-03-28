@@ -8,6 +8,7 @@ class OrderController{
 
 		const productId=req.params.productId
 		const {quantity}=req.body
+		console.log('hola')
 
 		
 		const order= new Order()
@@ -23,16 +24,17 @@ class OrderController{
 	}
 
 
-	createAnOrderFromTheCart(req,res){
+	createAnOrderFromTheCart(req,res){	
 		const productId=req.params.productId
 		const {quantity}=req.body
 
 		
-		const order= new Order(req.user.id,productId,quantity)
+		const order= new Order()
 		const product= new Product()
 		const cart=new Cart()
 
-		const p1=order.create()
+		console.log('hola')
+		const p1=order.create(req.user.id,productId,quantity)
 		const p2=product.updateStock(productId,quantity)
 		const p3=cart.removeAProductFromTheCart(productId,req.user.id)
 
