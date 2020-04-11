@@ -28,10 +28,12 @@ module.exports = function(passport) {
   )
 
   passport.serializeUser((user, done) =>{
+    console.log("AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
     done(null, user.id);
   });
   
   passport.deserializeUser((id, done)=> {
+    console.log("AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
     const text='SELECT * FROM users WHERE id=$1'
     const values = [id]
 
